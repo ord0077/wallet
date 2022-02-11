@@ -134,7 +134,7 @@ class MyApp extends StatelessWidget {
 
                 routes: <String, WidgetBuilder>{
                   // '/login': (BuildContext context) => new LoginScreen(),
-                  '/admin': (BuildContext context) => new Dashboard(),
+                  // '/admin': (BuildContext context) => new Dashboard(),
                   // '/guard': (BuildContext context) => new GuardDashboard(),
                   // '/wewatch_manager': (BuildContext context) => new wwmanager_Dashboard(),
                   // '/project_Admin': (BuildContext context) => new client_Dashboard(),
