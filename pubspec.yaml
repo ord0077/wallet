@@ -40,20 +40,10 @@ dependencies:
   intl: any
   #  flutter_statusbarcolor: any
   connectivity: any
-  #data_connection_checker:
-  #fluttertoast: any
-  sqflite: any
-  #flutter_easyloading:
-  #weather: any
-  #file_picker:
-  #cached_network_image: ^3.0.0
-  #geolocator: any
-  #flutter_spinkit: any
-  #flutter_paginator: any
-  #full_screen_image: any
-  #flutter_downloader: any
-  #permission_handler: ^8.1.4+2
-  #flutter_inappwebview: ^5.3.2
+  fluttertoast: any
+  flutter_launcher_icons: ^0.9.2
+
+
 
 
 dev_dependencies:
@@ -74,7 +64,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
+    - assets/images/pkwallets.png
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
@@ -104,3 +94,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:
+  image_path: "assets/pk_wallets_icon.png"
+  android: true
+  ios: true
+  # optionally, as transparency is not allowed on app store
+  # remove_alpha_ios: true

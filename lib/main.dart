@@ -1,13 +1,16 @@
+
+
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pk_wallets/Animation/FadeAnimation.dart';
-import 'package:pk_wallets/consts.dart';
 import 'package:pk_wallets/models/loginModel.dart';
+import 'package:pk_wallets/screens/login_screen.dart';
+import 'package:pk_wallets/screens/shopkeeper/shopkeeper_dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'consts.dart';
+
 
 Future<void> main() async {
 
@@ -64,30 +67,12 @@ class MyApp extends StatelessWidget {
               print(userKey);
 
               if (isLogged ) {
-                  Map<String,dynamic> userMap = jsonDecode(snapshot.data!.getString(userKey ) ?? "");
+                Map<String, dynamic> userMap = jsonDecode(snapshot.data!.getString(userKey) ?? "");
+                LoginModel userData = LoginModel.fromJson(userMap);
 
-                  LoginModel userData = LoginModel.fromJson(userMap);
-
-
-                switch (userData.user.userType) {
-                  case "admin":
-                    route = '/admin';
-                    break;
-
-                  case "Security Guard":
-                    route = '/guard';
-                    break;
-//
-                  case "Wewatch Manager":
-                    route = '/wewatch_manager';
-                    break;
-
-                  case "project Admin":
-                    route = '/project_Admin';
-                    break;
-
-                  case "public":
-                    route = '/public';
+                switch (userData.user.roleType) {
+                  case "Shopkeeper":
+                    route = '/Shopkeeper';
                     break;
 
                   default:
@@ -98,7 +83,7 @@ class MyApp extends StatelessWidget {
 
               return MaterialApp(
 
-                title: 'WeWatch',
+                title: 'PK Wallets',
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   primaryColorLight: Colors.black,
@@ -133,16 +118,9 @@ class MyApp extends StatelessWidget {
                 ),
 
                 routes: <String, WidgetBuilder>{
-                  // '/login': (BuildContext context) => new LoginScreen(),
-                  '/admin': (BuildContext context) => new Dashboard(),
-                  // '/guard': (BuildContext context) => new GuardDashboard(),
-                  // '/wewatch_manager': (BuildContext context) => new wwmanager_Dashboard(),
-                  // '/project_Admin': (BuildContext context) => new client_Dashboard(),
-                  // '/public': (BuildContext context) => new public_Dashboard(),
-// '/client': (BuildContext context) => new client_Dashboard(),
+                  '/login': (BuildContext context) => new LoginScreen(),
+                  '/Shopkeeper': (BuildContext context) =>  new ShopkeeperDashboard(),
 
-
-//                '/customer' : (BuildContext context) => new AddUser(),
 
                 },
 
@@ -195,5 +173,4 @@ class MyApp extends StatelessWidget {
 //    }
 //    );
   }
-
 }
