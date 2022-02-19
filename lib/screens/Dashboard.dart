@@ -38,17 +38,18 @@ class _DashBoardState extends State<DashBoard> {
   }
 
 
-  Padding RecordsCount(
+  Wrap RecordsCount(
       AsyncSnapshot<List<RecentRecords>> snapshot, Function gridClicked) {
-    return Padding(
+    return Wrap(children:[Padding(
       padding:
-      EdgeInsets.only(left: 20.0, right: 20.0, bottom: 5.0, top: 20.0),
+      EdgeInsets.only(left: 20, bottom: 5.0, top: 5.0),
       child: GridView.builder(
         shrinkWrap: true,
         itemCount: snapshot.data!.length,
         gridDelegate:
         SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
+          var size = MediaQuery.of(context).size;
           String? pending= snapshot.data![index].pending_records;
           String pendingStr="";
           String? accept= snapshot.data![index].accepted_records;
@@ -70,98 +71,96 @@ class _DashBoardState extends State<DashBoard> {
           }else{
             refundStr=refund;
           }
-          return GestureDetector(
-            child:Center(
-              child:  Wrap(
-                children: [
-                  Container(
+          return Container(
+            width: size.longestSide,
+            child:  Flexible(
+                child:Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: size.width*.25,
+                      child:
+                      Column(
+                        children: [
+                          Text(
+                            pendingStr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat Medium',
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30),
+                          ),
+                          Text(
+                            "Pending",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat Medium',
+                                color: Colors.black,
+                                fontSize: 20),
+                          ),
+                        ],
+                      )
+                      ,),
+                    Container(
 
-                    margin: EdgeInsets.only(left: 20,right: 20),
-                    child: Wrap(
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(child:  Column(
-                              children: [
-                                Text(
-                                  pendingStr,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat Medium',
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30),
-                                ),
-                                Text(
-                                  "Pending",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat Medium',
-                                      color: Colors.black,
-                                      fontSize: 20),
-                                ),
-                              ],
-                            ),),
-                            Expanded(child:  Column(
-                              children: [
-                                Text(
-                                  acceptStr,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat Medium',
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30),
-                                ),
-                                Text(
-                                  "Accepted",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontFamily: 'Montserrat Medium',
-                                      color: Colors.black,
-                                      fontSize: 20),
-                                ),
-                              ],
-                            ),),
-                            Expanded(
-                              child:   Column(
-                                children: [
-                                  Text(
-                                    refundStr,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontFamily: 'Montserrat Medium',
-                                        color: Colors.blue,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 30),
-                                  ),
-                                  Text(
-                                    "Refund",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontFamily: 'Montserrat Medium',
-                                        color: Colors.black,
-                                        fontSize: 20),
-                                  ),
-                                ],
-                              )
-                              ,
-                            ),
-
-                          ],
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-            onTap: () => gridClicked(context, snapshot.data![index]),
+                      width: size.width*.3,
+                      child: Column(
+                        children: [
+                          Text(
+                            acceptStr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat Medium',
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30),
+                          ),
+                          Text(
+                            "Accepted",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat Medium',
+                                color: Colors.black,
+                                fontSize: 20),
+                          ),
+                        ],
+                      )
+                      ,),
+                    Container(
+                      width: size.width*.25,
+                      child:
+                      Column(
+                        children: [
+                          Text(
+                            refundStr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat Medium',
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30),
+                          ),
+                          Text(
+                            "Refund",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Montserrat Medium',
+                                color: Colors.black,
+                                fontSize: 20),
+                          ),
+                        ],
+                      )
+                      ,),
+                  ],
+                )),
           );
         },
       ),
-    );
+    )]);
   }
+
 
 
 
@@ -444,35 +443,32 @@ class CategoryCell extends StatelessWidget {
           child: Container(
             child: Padding(
               padding: EdgeInsets.all(5),
-              child: Card(
-                margin: EdgeInsets.all(1),
-                elevation: 5.0,
-                child:Container(
-                  width: size.width * 0.5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12.0),
-                    ),
-                    border: Border.all(
-                        color: Colors.blue,
-                        width: 2
-                    ),
+              child: Container(
+                width: size.width * 0.5,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12.0),
                   ),
-                  child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            "assets/images/tpo.jpg",
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            "${cellModel.name}",
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ],
-                      )),
+                  border: Border.all(
+                      color: Colors.blue,
+                      width: 2
+                  ),
                 ),
+                child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/tpo.jpg",
+                        ),
+                        const SizedBox(height: 2),
+                        Text(
+                          "${cellModel.name}",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ],
+                    )),
               ),
             ),
           ),
