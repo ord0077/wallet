@@ -40,6 +40,7 @@ dependencies:
   intl: any
   #  flutter_statusbarcolor: any
   connectivity: any
+  curved_navigation_bar: ^1.0.3
   fluttertoast: any
 
 
