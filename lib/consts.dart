@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+
+import 'package:pk_wallets/screens/Dashboard.dart';
 /// Color used as app background
 //const Color lightBackgroundColor = Color(0xFFF9F8F4);
 const Color lightBackgroundColor = Color(0xFFf6f6f6);
 const Color DarkBlue = Color.fromRGBO(49,131,182,1);
 const Color Orange = Color.fromRGBO(241, 136, 18, 1);
 const Color AppBlue = Color.fromRGBO(45, 87, 163, 1);
+Color color_blue = HexColor.fromHex('#3183b5');
 
 // Shared Pref key
 const String userKey = "userData";

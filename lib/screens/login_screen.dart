@@ -173,6 +173,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           userData.setInt('user_id', loginModel.user.id);
                                           userData.setString('role_type', loginModel.user.roleType  );
                                           userData.setString('user_name', loginModel.user.firstName);
+                                          userData.setString("wallet", loginModel.user.wallet);
+
                                           userData.setString(userKey, userJSON);
                                           var tokenn = userData.getString('token');
                                           print(tokenn);

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pk_wallets/models/loginModel.dart';
+import 'package:pk_wallets/screens/Dashboard.dart';
 import 'package:pk_wallets/screens/login_screen.dart';
 import 'package:pk_wallets/screens/shopkeeper/shopkeeper_dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -119,7 +120,7 @@ class MyApp extends StatelessWidget {
 
                 routes: <String, WidgetBuilder>{
                   '/login': (BuildContext context) => new LoginScreen(),
-                  '/Shopkeeper': (BuildContext context) =>  new ShopkeeperDashboard(),
+                  '/Shopkeeper': (BuildContext context) =>  new DashBoard(),
 
 
                 },
