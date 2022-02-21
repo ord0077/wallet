@@ -478,6 +478,7 @@ class CategoryCell extends StatelessWidget {
   }
 }
 
+
 class Services {
   static Future<List<Category>> fetchHomeData(String Url) async {
     final response = await http.get(Uri.parse(Url));
