@@ -41,6 +41,7 @@ dependencies:
   #  flutter_statusbarcolor: any
   connectivity: any
   fluttertoast: any
+  auto_size_text: any
 
 
 
@@ -78,6 +79,7 @@ flutter:
   assets:
     - assets/images/pkwallets.png
     - assets/pk_wallets_icon.png
+    - assets/images/
 
   # assets:
   #   - images/a_dot_burr.jpeg
