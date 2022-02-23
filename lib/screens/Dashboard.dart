@@ -387,8 +387,6 @@ class _DashBoardState extends State<DashBoard> {
             ),
           ),
           bottomNavigationBar: CurvedNavigationBar(
-            key: _bottomNavigationKey,
-            index: 2,
             height: 60.0,
             items: <Widget>[
               Icon(
@@ -407,11 +405,11 @@ class _DashBoardState extends State<DashBoard> {
             animationCurve: Curves.easeInOut,
             animationDuration: Duration(milliseconds: 600),
             onTap: (index) {
-              setState(() {
-                _page = index;
-              });
+              // setState(() {
+              //   _page = index;
+              // });
             },
-            letIndexChange: (index) => true,
+            // letIndexChange: (index) => true,
           ),
         )));
   }
