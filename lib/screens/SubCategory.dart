@@ -76,7 +76,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             backgroundColor: HexColor.fromHex('#3183b5'),
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.white),
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => {
+                DashBoard.subcatListFilter=<SubCategory>[],
+                Navigator.of(context).pop()},
             ),
             title: AutoSizeText(
               cat_name,
