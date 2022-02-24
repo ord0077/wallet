@@ -17,6 +17,8 @@ import '../widgets/CustomAlertDialog.dart';
 import 'SubCategory.dart';
 
 class DashBoard extends StatefulWidget {
+  static List<SubCategory> subcatList= <SubCategory>[];
+  static List<SubCategory> subcatListFilter= <SubCategory>[];
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
@@ -26,7 +28,7 @@ class _DashBoardState extends State<DashBoard> {
   String userName = '';
 
   String walletAmount = "";
-  static List<SubCategory> subcatList= <SubCategory>[];
+
   Padding CategoryGrid(
       AsyncSnapshot<List<Category>> snapshot, Function gridClicked) {
     return Padding(
@@ -194,7 +196,7 @@ class _DashBoardState extends State<DashBoard> {
                   child: Column(
                     children: [
                       Flexible(
-                          flex: 4,
+                          flex: 3,
                           child: Container(
                             height: height,
                             width: width / 1.2,
@@ -266,7 +268,7 @@ class _DashBoardState extends State<DashBoard> {
 //                       textAlign: TextAlign.right,
                                                   ),
                                                   const SizedBox(
-                                                    height: 30,
+                                                    height: 10,
                                                     width: 1,
                                                   ),
                                                   ConstrainedBox(
@@ -293,7 +295,7 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                           )),
                       Flexible(
-                          flex: 7,
+                          flex: 8,
                           child: Container(
                             child: Center(
                               child: Container(
@@ -331,9 +333,9 @@ class _DashBoardState extends State<DashBoard> {
                                               Radius.circular(5.0),
                                             ),
                                             border: Border.all(
-                                                color: Color(0xFF64B5F6),
+                                                color: color_blue,
                                                 width: 2),
-                                            color: Color(0xFF64B5F6),
+                                            color: color_blue,
                                           ),
                                           child: Padding(
                                             padding: const EdgeInsets.all(8.0),
@@ -349,23 +351,7 @@ class _DashBoardState extends State<DashBoard> {
                                     ),
 
                                   ],
-                                ),
-                                // Center(
-                                //   child: Container(
-                                //     child: FutureBuilder<List<RecentRecords>>(
-                                //       future: Services.fetchRecordsCount(
-                                //           "http://newapp.pkwallets.com/api/get_count_record"),
-                                //       builder: (context, snapshot) {
-                                //         return snapshot.connectionState ==
-                                //             ConnectionState.done
-                                //             ? snapshot.hasData
-                                //             ? RecordsCount(snapshot, gridClicked)
-                                //             : ComComp.retryButton(fetch)
-                                //             : ComComp.circularProgress();
-                                //       },
-                                //     ),
-                                //   ),
-                                // ),
+                                )
                               ],
                             ),
                           )),
@@ -457,9 +443,9 @@ gridClicked(BuildContext context, Category cellModel) async {
   List<SubCategory> SubCategoryList = SubCategory.decode(sub_categoryString!);
   List<SubCategory> SubCategoryListFiltered = <SubCategory>[];
   String encodedData = "";
-  for (var i = 0; i < _DashBoardState.subcatList.length; i++) {
-    if (_DashBoardState.subcatList[i].cat_id == cellModel.id.toString()) {
-      SubCategory subCategoryModel = _DashBoardState.subcatList[i];
+  for (var i = 0; i < DashBoard.subcatList.length; i++) {
+    if (DashBoard.subcatList[i].cat_id == cellModel.id.toString()) {
+      SubCategory subCategoryModel = DashBoard.subcatList[i];
       // encodedData += SubCategory.encode([
       //   SubCategory(
       //     cat_id: subCategoryModel.cat_id,
@@ -469,15 +455,17 @@ gridClicked(BuildContext context, Category cellModel) async {
       //   )
       // ]);
       SubCategoryListFiltered.add(subCategoryModel);
+      DashBoard.subcatListFilter.add(subCategoryModel);
+
     }
   }
   String? nme = cellModel.name;
   prefs.setString('cat_name', nme == null ? "" : nme);
   await prefs.setString('sub_category', encodedData);
-  // Navigator.of(context)
-  //     .push(MaterialPageRoute(builder: (context) => SubCategoryScreen()));
+  Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => SubCategoryScreen()));
 
-  _opensubCatgory(context,nme!,SubCategoryListFiltered);
+  // _opensubCatgory(context,nme!,SubCategoryListFiltered);
 }
 Future<void> _opensubCatgory(BuildContext context,String heading, List<SubCategory> SubCategoryList) async {
   return showDialog<void>(
@@ -586,7 +574,7 @@ class CategoryCell extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(5),
               child: Container(
-                width: size.width * 0.5,
+                width: size.width * 0.4,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -633,7 +621,7 @@ class SubCategoryCell extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(5),
               child: Container(
-                width: size.width * 0.5,
+                width: size.width * 0.4,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -642,7 +630,7 @@ class SubCategoryCell extends StatelessWidget {
                   border: Border.all(color: Colors.blue, width: 2),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.0),
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
                     child: Column(
                       children: [
                         Image.asset(
@@ -677,11 +665,12 @@ class Services {
           _category_list.add(Category.fromJson(item));
         }
       }
-      _DashBoardState.subcatList=<SubCategory>[];
+      DashBoard.subcatList=<SubCategory>[];
+      DashBoard.subcatListFilter=<SubCategory>[];
       for (var item in convert.jsonDecode(response.body)['sub_category']) {
         {
           _subcategory_list.add(SubCategory.fromJson(item));
-          _DashBoardState.subcatList.add(SubCategory.fromJson(item));
+          DashBoard.subcatList.add(SubCategory.fromJson(item));
           encodedData = SubCategory.encode([SubCategory.fromJson(item)]);
         }
       }

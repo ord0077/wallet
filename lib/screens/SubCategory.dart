@@ -16,7 +16,6 @@ class SubCategoryScreen extends StatefulWidget {
 }
 
 class _SubCategoryScreenState extends State<SubCategoryScreen> {
-  List<SubCategory> SubCategoryList = <SubCategory>[];
   bool? isHomeDataLoading;
   String cat_name = '';
 
@@ -30,12 +29,11 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   Padding SubCategoryGrid(
       List<SubCategory> snapshot, Function gridClicked) {
     return Padding(
-      padding: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 5.0, top: 20.0),
+      padding: EdgeInsets.only(left: 5.0, right: 5.0),
       child: GridView.builder(
         shrinkWrap: true,
         itemCount: snapshot.length,
-        gridDelegate:
-        SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 1.5,
           crossAxisCount: 2,
         ),
@@ -73,7 +71,24 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         ),
         child: SafeArea(
             child: Scaffold(
-          appBar: MyAppBar(),
+
+          appBar: AppBar(
+            backgroundColor: HexColor.fromHex('#3183b5'),
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            title: AutoSizeText(
+              cat_name,
+              style: TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w500),
+              minFontSize: 20,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+//                       textAlign: TextAlign.right,
+            ),
+            centerTitle: true,
+          ),
           body: SingleChildScrollView(
             child: Stack(
               children: [
@@ -84,9 +99,9 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                       children: [
                         Center(
                           child: AutoSizeText(
-                            cat_name,
+                            "",
                             style: TextStyle(
-                                color: Colors.black, fontWeight: FontWeight.w500),
+                                color: Colors.white, fontWeight: FontWeight.w500),
                             minFontSize: 20,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
@@ -94,11 +109,27 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                           ),
                         ),
                         Container(
-                          child: Center(
-                            child: Container(
-                              child: SubCategoryGrid(
-                                  SubCategoryList, gridClicked),
-                            ),
+                          child: Wrap(
+                              children:[ Container(
+                                // Specify some width
+                                width: size.longestSide,
+                                height: size.longestSide,
+                                child:  Container(
+                                  child: DashBoard.subcatListFilter.length!=0?SubCategoryGrid(
+                                      DashBoard.subcatListFilter, gridClicked):
+                                  Container(
+                                    margin: const EdgeInsets.all(20.0),
+                                    padding: const EdgeInsets.all(20.0),
+                                    child: Center(
+                                      child: Text(
+                                        "No Record Found!",
+                                        style:
+                                        new TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),]
                           ),
                         )
                       ],
@@ -116,7 +147,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
     //Return int
     setState(() {
       cat_name = (prefs.getString('cat_name') ?? '');
-      SubCategoryList = SubCategory.decode(sub_categoryString!);
+      // SubCategoryList = SubCategory.decode(sub_categoryString!);
     });
   }
 }
