@@ -32,13 +32,13 @@ class _DashBoardState extends State<DashBoard> {
   Padding CategoryGrid(
       AsyncSnapshot<List<Category>> snapshot, Function gridClicked) {
     return Padding(
-      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+      padding: EdgeInsets.only(left: 15.0, right: 15.0),
       child: GridView.builder(
         shrinkWrap: true,
         itemCount: snapshot.data!.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1.5,
-          crossAxisCount: 2,
+          childAspectRatio: 1.4,
+          crossAxisCount: 3,
         ),
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
@@ -53,7 +53,7 @@ class _DashBoardState extends State<DashBoard> {
   Padding RecordsCount(
       AsyncSnapshot<List<RecentRecords>> snapshot, Function gridClicked) {
     return Padding(
-      padding: EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(left: 20,top: 10),
       child: ListView.builder(
         itemCount: snapshot.data!.length,
         itemBuilder: (BuildContext context, int index) {
@@ -97,7 +97,7 @@ class _DashBoardState extends State<DashBoard> {
                             fontFamily: 'Montserrat Medium',
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
-                            fontSize: 30),
+                            fontSize: 25),
                       ),
                       Text(
                         "Pending",
@@ -105,7 +105,7 @@ class _DashBoardState extends State<DashBoard> {
                         style: TextStyle(
                             fontFamily: 'Montserrat Medium',
                             color: Colors.black,
-                            fontSize: 20),
+                            fontSize: 15),
                       ),
                     ],
                   ),
@@ -121,7 +121,7 @@ class _DashBoardState extends State<DashBoard> {
                             fontFamily: 'Montserrat Medium',
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
-                            fontSize: 30),
+                            fontSize: 25),
                       ),
                       Text(
                         "Accepted",
@@ -129,7 +129,7 @@ class _DashBoardState extends State<DashBoard> {
                         style: TextStyle(
                             fontFamily: 'Montserrat Medium',
                             color: Colors.black,
-                            fontSize: 20),
+                            fontSize: 15),
                       ),
                     ],
                   ),
@@ -145,7 +145,7 @@ class _DashBoardState extends State<DashBoard> {
                             fontFamily: 'Montserrat Medium',
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
-                            fontSize: 30),
+                            fontSize: 25),
                       ),
                       Text(
                         "Refund",
@@ -153,7 +153,7 @@ class _DashBoardState extends State<DashBoard> {
                         style: TextStyle(
                             fontFamily: 'Montserrat Medium',
                             color: Colors.black,
-                            fontSize: 20),
+                            fontSize: 15),
                       ),
                     ],
                   ),
@@ -198,19 +198,23 @@ class _DashBoardState extends State<DashBoard> {
                       Flexible(
                           flex: 3,
                           child: Container(
+                            margin: EdgeInsets.only(top: 10),
                             height: height,
                             width: width / 1.2,
                             child: Center(
                               child: Card(
-                                  margin: EdgeInsets.all(10),
-                                  elevation: 2.0,
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(color: Colors.white70, width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  margin: EdgeInsets.all(5),
+                                  elevation: 5.0,
                                   child: Padding(
-                                      padding: EdgeInsets.all(15),
+                                      padding: EdgeInsets.all(10),
                                       child: Center(
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
                                             Expanded(
                                               child: Column(
@@ -268,7 +272,7 @@ class _DashBoardState extends State<DashBoard> {
 //                       textAlign: TextAlign.right,
                                                   ),
                                                   const SizedBox(
-                                                    height: 10,
+                                                    height: 20,
                                                     width: 1,
                                                   ),
                                                   ConstrainedBox(
@@ -295,7 +299,7 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                           )),
                       Flexible(
-                          flex: 8,
+                          flex: 4,
                           child: Container(
                             child: Center(
                               child: Container(
@@ -356,9 +360,10 @@ class _DashBoardState extends State<DashBoard> {
                             ),
                           )),
                       Flexible(
-                          flex: 2,
+                          flex: 4,
                           child: Center(
                             child: Container(
+                              margin: EdgeInsets.only(top: 10),
                               child: FutureBuilder<
                                   List<RecentRecords>>(
                                 future: Services.fetchRecordsCount(
@@ -580,19 +585,31 @@ class CategoryCell extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),
-                  border: Border.all(color: Colors.blue, width: 2),
+                  border: Border.all(color: color_blue, width: 2),
                 ),
                 child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.0),
                     child: Column(
                       children: [
-                        Image.asset(
-                          "assets/images/tpo.jpg",
+                        ConstrainedBox(
+                          constraints: BoxConstraints(
+                            minWidth: 20,
+                            minHeight: 30,
+                            maxWidth: 50,
+                            maxHeight: 80,
+                          ),
+                          child: Container(
+                            child: Image.asset(
+                              "assets/images/tpo.jpg",
+                              // fit:BoxFit.fitWidth,
+                              // height: 40,
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 2),
                         Text(
                           "${cellModel.name}",
-                          style: TextStyle(color: Colors.blue),
+                          style: TextStyle(color: Colors.blue,fontSize: 10),
                         ),
                       ],
                     )),

@@ -8,6 +8,8 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+
+      padding: EdgeInsets.only(top: 5,bottom: 5),
       color: color_blue,
       child:Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -17,11 +19,12 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
             child: RawMaterialButton(
               onPressed: () {},
               elevation: 2.0,
+              padding: EdgeInsets.all(5),
               fillColor: const Color(0xFFF5F6F9),
               child: Icon(
                 Icons.person,
                 color: color_blue,
-                size: 40,
+                size: 50,
               ),
               shape: const CircleBorder(),
             ),
@@ -29,7 +32,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           Flexible(
             child: Image.asset(
-              "assets/images/pkwallets.png",
+              "assets/images/pkwallets-light.png",
             ),
             flex: 2,
           ),
