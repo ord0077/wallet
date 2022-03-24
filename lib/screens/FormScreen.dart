@@ -50,22 +50,33 @@ class _SubmitFormState extends State<SubmitForm> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(cat_name),
+          title: Center(child: Text(cat_name)),
         ),
-        body: TestForm(),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TestForm(cat_name),
+        ),
       ),
     );
   }
 }
 
 class TestForm extends StatefulWidget {
+  String cat_name;
+
+
+  TestForm(this.cat_name);
+
   @override
-  _TestFormState createState() => _TestFormState();
+  _TestFormState createState() => _TestFormState(cat_name);
 }
 
 class _TestFormState extends State<TestForm> {
   final _formKey = GlobalKey<FormState>();
   Model model = Model();
+  String cat_nme;
+
+  _TestFormState(this.cat_nme);
 
   @override
   Widget build(BuildContext context) {
