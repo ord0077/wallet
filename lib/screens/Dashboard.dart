@@ -84,8 +84,7 @@ class _DashBoardState extends State<DashBoard> {
           }
           return Container(
             width: size.longestSide,
-            child: Flexible(
-                child: Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -162,7 +161,7 @@ class _DashBoardState extends State<DashBoard> {
                   ),
                 ),
               ],
-            )),
+            )
           );
         },
       ),
@@ -328,30 +327,28 @@ class _DashBoardState extends State<DashBoard> {
                           children: [
                             Wrap(
                               children: [
-                                Flexible(
-                                    flex: 1,
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                          left: 17, right: 17, bottom: 1),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(5.0),
-                                        ),
-                                        border: Border.all(
-                                            color: color_blue, width: 2),
-                                        color: color_blue,
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      left: 17, right: 17, bottom: 1),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.0),
+                                    ),
+                                    border: Border.all(
+                                        color: color_blue, width: 2),
+                                    color: color_blue,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: Text(
+                                        "Recent Records",
+                                        style:
+                                        TextStyle(color: Colors.white),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Center(
-                                          child: Text(
-                                            "Recent Records",
-                                            style:
-                                                TextStyle(color: Colors.white),
-                                          ),
-                                        ),
-                                      ),
-                                    )),
+                                    ),
+                                  ),
+                                )
                               ],
                             )
                           ],
@@ -373,85 +370,84 @@ class _DashBoardState extends State<DashBoard> {
                                       :
                               Container(
                                 width: size.longestSide,
-                                child: Flexible(
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Container(
-                                          width: size.width * .25,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "100",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontFamily: 'Montserrat Medium',
-                                                    color: Colors.blue,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 25),
-                                              ),
-                                              Text(
-                                                "Pending",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontFamily: 'Montserrat Medium',
-                                                    color: Colors.black,
-                                                    fontSize: 15),
-                                              ),
-                                            ],
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Container(
+                                      width: size.width * .25,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "100",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat Medium',
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25),
                                           ),
-                                        ),
-                                        Container(
-                                          width: size.width * .3,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "120",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontFamily: 'Montserrat Medium',
-                                                    color: Colors.blue,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 25),
-                                              ),
-                                              Text(
-                                                "Accepted",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontFamily: 'Montserrat Medium',
-                                                    color: Colors.black,
-                                                    fontSize: 15),
-                                              ),
-                                            ],
+                                          Text(
+                                            "Pending",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat Medium',
+                                                color: Colors.black,
+                                                fontSize: 15),
                                           ),
-                                        ),
-                                        Container(
-                                          width: size.width * .25,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "101",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontFamily: 'Montserrat Medium',
-                                                    color: Colors.blue,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 25),
-                                              ),
-                                              Text(
-                                                "Refund",
-                                                textAlign: TextAlign.center,
-                                                style: TextStyle(
-                                                    fontFamily: 'Montserrat Medium',
-                                                    color: Colors.black,
-                                                    fontSize: 15),
-                                              ),
-                                            ],
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: size.width * .3,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "120",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat Medium',
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25),
                                           ),
-                                        ),
-                                      ],
-                                    )),
+                                          Text(
+                                            "Accepted",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat Medium',
+                                                color: Colors.black,
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: size.width * .25,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            "101",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat Medium',
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25),
+                                          ),
+                                          Text(
+                                            "Refund",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontFamily: 'Montserrat Medium',
+                                                color: Colors.black,
+                                                fontSize: 15),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                )
                               )
                               /*ComComp.retryButton(fetch)*/
                                   : ComComp.circularProgress();
