@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/common.dart';
 import 'Dashboard.dart';
+import 'FormScreen.dart';
 
 class SubCategoryScreen extends StatefulWidget {
   const SubCategoryScreen({Key? key}) : super(key: key);
@@ -40,13 +41,24 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: SubCategoryCell(snapshot[index]),
-            onTap: () => gridClicked(context, snapshot[index]),
+            onTap: () =>   gridClicked(context, snapshot[index]),
           );
         },
       ),
     );
   }
+  gridClicked(BuildContext context, SubCategory cellModel) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String encodedData = "";
 
+    String? nme = cellModel.name;
+    prefs.setString('cat_name', nme == null ? "" : nme);
+    await prefs.setString('sub_category', encodedData);
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => SubmitForm()));
+
+    // _opensubCatgory(context,nme!,SubCategoryListFiltered);
+  }
   fetch() {
     setLoading(true);
   }
@@ -142,6 +154,11 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         )));
   }
 
+  gridClickedSub(BuildContext context) async {
+  ;
+
+    // _opensubCatgory(context,nme!,SubCategoryListFiltered);
+  }
   FetchData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 

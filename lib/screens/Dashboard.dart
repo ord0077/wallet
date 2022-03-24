@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:convert' as convert;
 
+import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:http/http.dart' as http;
 import 'package:pk_wallets/common/common.dart';
 import 'package:pk_wallets/consts.dart';
 import 'package:pk_wallets/models/categoryModel.dart';
+import 'package:pk_wallets/screens/ProfileScreen.dart';
 import 'package:pk_wallets/widgets/appbarWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,8 +19,9 @@ import '../widgets/CustomAlertDialog.dart';
 import 'SubCategory.dart';
 
 class DashBoard extends StatefulWidget {
-  static List<SubCategory> subcatList= <SubCategory>[];
-  static List<SubCategory> subcatListFilter= <SubCategory>[];
+  static List<SubCategory> subcatList = <SubCategory>[];
+  static List<SubCategory> subcatListFilter = <SubCategory>[];
+
   @override
   State<DashBoard> createState() => _DashBoardState();
 }
@@ -26,7 +29,7 @@ class DashBoard extends StatefulWidget {
 class _DashBoardState extends State<DashBoard> {
   bool? isHomeDataLoading;
   String userName = '';
-
+  int current_index = 0;
   String walletAmount = "";
 
   Padding CategoryGrid(
@@ -53,7 +56,7 @@ class _DashBoardState extends State<DashBoard> {
   Padding RecordsCount(
       AsyncSnapshot<List<RecentRecords>> snapshot, Function gridClicked) {
     return Padding(
-      padding: EdgeInsets.only(left: 20,top: 10),
+      padding: EdgeInsets.only(left: 20, top: 10),
       child: ListView.builder(
         itemCount: snapshot.data!.length,
         itemBuilder: (BuildContext context, int index) {
@@ -166,6 +169,13 @@ class _DashBoardState extends State<DashBoard> {
     );
   }
 
+  void _changeTab(int index) {
+    setState(() {
+      current_index = index;
+      // tabs[index];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -174,6 +184,352 @@ class _DashBoardState extends State<DashBoard> {
     double height = MediaQuery.of(context).size.height;
     int _page = 0;
     GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+    final tabs = [
+      Stack(
+        children: [
+          Container(
+            height: height * 0.15,
+            color: color_blue,
+          ),
+          Container(
+              height: height,
+              width: width,
+              child: Column(
+                children: [
+                  MyAppBar(),
+                  Flexible(
+                      flex: 3,
+                      child: Container(
+                        margin: EdgeInsets.only(top: 10),
+                        height: height,
+                        width: width / 1.2,
+                        child: Center(
+                          child: Card(
+                              shape: RoundedRectangleBorder(
+                                side:
+                                    BorderSide(color: Colors.white70, width: 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              margin: EdgeInsets.all(5),
+                              elevation: 5.0,
+                              child: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Expanded(
+                                                child: const AutoSizeText(
+                                                  "BALANCE",
+                                                  // textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          'Montserrat Medium',
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 20),
+                                                ),
+                                              ),
+
+                                              // const SizedBox(height: 50,),
+                                              Expanded(
+                                                child: AutoSizeText(
+                                                    "SR " + walletAmount,
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          'Montserrat Medium',
+                                                      color: color_blue,
+                                                      fontSize: 25,
+                                                    ),
+                                                    minFontSize: 10),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+
+                                        // const SizedBox(width: 20),
+                                        // Spacer(),
+                                        Expanded(
+                                          child: Column(
+                                            children: [
+                                              new AutoSizeText(
+                                                userName,
+                                                style: TextStyle(
+                                                    color: Colors.black87,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                                minFontSize: 20,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+//                       textAlign: TextAlign.right,
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                                width: 1,
+                                              ),
+                                              ConstrainedBox(
+                                                constraints: BoxConstraints(
+                                                  minWidth: 20,
+                                                  minHeight: 30,
+                                                  maxWidth: 50,
+                                                  maxHeight: 80,
+                                                ),
+                                                child: Container(
+                                                  child: Image.asset(
+                                                    "assets/images/tpo.jpg",
+                                                    // fit:BoxFit.fitWidth,
+                                                    // height: 40,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ))),
+                        ),
+                      )),
+                  Flexible(
+                      flex: 4,
+                      child: Container(
+                        child: Center(
+                          child: Container(
+                            child: FutureBuilder<List<Category>>(
+                              future: Services.fetchHomeData(
+                                  "http://newapp.pkwallets.com/api/get_all_category"),
+                              builder: (context, snapshot) {
+                                return snapshot.connectionState ==
+                                        ConnectionState.done
+                                    ? snapshot.hasData
+                                        ? CategoryGrid(snapshot, gridClicked)
+                                        : ComComp.retryButton(fetch)
+                                    : ComComp.circularProgress();
+                              },
+                            ),
+                          ),
+                        ),
+                      )),
+                  Flexible(
+                      flex: 1,
+                      child: Container(
+                        margin: EdgeInsets.only(top: 5),
+                        child: Column(
+                          children: [
+                            Wrap(
+                              children: [
+                                Flexible(
+                                    flex: 1,
+                                    child: Container(
+                                      margin: EdgeInsets.only(
+                                          left: 17, right: 17, bottom: 1),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(5.0),
+                                        ),
+                                        border: Border.all(
+                                            color: color_blue, width: 2),
+                                        color: color_blue,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Center(
+                                          child: Text(
+                                            "Recent Records",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                    )),
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                  Flexible(
+                      flex: 4,
+                      child: Center(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 10),
+                          child: FutureBuilder<List<RecentRecords>>(
+                            future: Services.fetchRecordsCount(
+                                "http://newapp.pkwallets.com/api/get_count_record"),
+                            builder: (context, snapshot) {
+                              return snapshot.connectionState ==
+                                      ConnectionState.done
+                                  ? snapshot.hasData
+                                      ? RecordsCount(snapshot, gridClicked)
+                                      : ComComp.retryButton(fetch)
+                                  : ComComp.circularProgress();
+                            },
+                          ),
+                        ),
+                      )),
+                ],
+              ))
+        ],
+      ),
+      Stack(
+        children: [
+          Column(
+            children: [
+              Container(
+                color: Colors.black12,
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () => _changeTab(0),
+                        icon: Icon(
+                          AntIcons.arrowLeftOutlined,
+                          color: Colors.black,
+                        )),
+                    Text(
+                      '      ',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    Icon(Icons.receipt_long, size: 30, color: Colors.black),
+                    Text(
+                      'Payment History',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: FittedBox(
+                        child:DataTable(
+                          headingRowColor:
+                          MaterialStateColor.resolveWith((states) => Colors.blue),
+                          columns: [
+                            DataColumn(
+                                label: Text('Payment Date',
+                                    style: TextStyle(
+                                        color: Colors.white,
+
+                                        fontWeight: FontWeight.bold))),
+                            DataColumn(
+                                label: Text('Payment Mode',
+                                    style: TextStyle(
+
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold))),
+                            DataColumn(
+                                label: Text('Previous Outstanding',
+                                    style: TextStyle(
+
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold))),
+                            DataColumn(
+                                label: Text('Paid Amount',
+                                    style: TextStyle(
+
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold))),
+                            DataColumn(
+                                label: Text('Balance',
+                                    style: TextStyle(
+
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)))
+                          ],
+                          rows: [
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text('29-12-2020')),
+                              DataCell(Text('BPM-OGJ')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('5.380')),
+                              DataCell(Text('0.000')),
+                            ]),
+                          ],
+                        )),
+                  ))
+            ],
+          )
+
+        ],
+      ),
+      Center(
+        child: Text("Records"),
+      ),
+      Center(
+        child: Text("Add"),
+      ),
+      new ProfileScreen(changePage: _changeTab),
+    ];
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle(
@@ -183,234 +539,35 @@ class _DashBoardState extends State<DashBoard> {
         ),
         child: SafeArea(
             child: Scaffold(
-          appBar: MyAppBar(),
-          body: Stack(
-            children: [
-              Container(
-                height: height * 0.15,
-                color: color_blue,
-              ),
-              Container(
-                  height: height,
-                  width: width,
-                  child: Column(
-                    children: [
-                      Flexible(
-                          flex: 3,
-                          child: Container(
-                            margin: EdgeInsets.only(top: 10),
-                            height: height,
-                            width: width / 1.2,
-                            child: Center(
-                              child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    side: BorderSide(color: Colors.white70, width: 1),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  margin: EdgeInsets.all(5),
-                                  elevation: 5.0,
-                                  child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Center(
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Expanded(
-                                                    child: const AutoSizeText(
-                                                      "BALANCE",
-                                                      // textAlign: TextAlign.left,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: Colors.black,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 20),
-                                                    ),
-                                                  ),
-
-                                                  // const SizedBox(height: 50,),
-                                                  Expanded(
-                                                    child: AutoSizeText(
-                                                        "SR " + walletAmount,
-                                                        style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: color_blue,
-                                                          fontSize: 25,
-                                                        ),
-                                                        minFontSize: 10),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-
-                                            // const SizedBox(width: 20),
-                                            // Spacer(),
-                                            Expanded(
-                                              child: Column(
-                                                children: [
-                                                  new AutoSizeText(
-                                                    userName,
-                                                    style: TextStyle(
-                                                        color: Colors.black87,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                    minFontSize: 20,
-                                                    maxLines: 2,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-//                       textAlign: TextAlign.right,
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 20,
-                                                    width: 1,
-                                                  ),
-                                                  ConstrainedBox(
-                                                    constraints: BoxConstraints(
-                                                      minWidth: 20,
-                                                      minHeight: 30,
-                                                      maxWidth: 50,
-                                                      maxHeight: 80,
-                                                    ),
-                                                    child: Container(
-                                                      child: Image.asset(
-                                                        "assets/images/tpo.jpg",
-                                                        // fit:BoxFit.fitWidth,
-                                                        // height: 40,
-                                                      ),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ))),
-                            ),
-                          )),
-                      Flexible(
-                          flex: 4,
-                          child: Container(
-                            child: Center(
-                              child: Container(
-                                child: FutureBuilder<List<Category>>(
-                                  future: Services.fetchHomeData(
-                                      "http://newapp.pkwallets.com/api/get_all_category"),
-                                  builder: (context, snapshot) {
-                                    return snapshot.connectionState ==
-                                            ConnectionState.done
-                                        ? snapshot.hasData
-                                            ? CategoryGrid(
-                                                snapshot, gridClicked)
-                                            : ComComp.retryButton(fetch)
-                                        : ComComp.circularProgress();
-                                  },
-                                ),
-                              ),
-                            ),
-                          )),
-                      Flexible(
-                          flex: 1,
-                          child: Container(
-                            margin: EdgeInsets.only(top: 5),
-                            child: Column(
-                              children: [
-                                Wrap(
-                                  children: [
-                                    Flexible(
-                                        flex: 1,
-                                        child: Container(
-                                          margin: EdgeInsets.only(
-                                              left: 17, right: 17, bottom: 1),
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(5.0),
-                                            ),
-                                            border: Border.all(
-                                                color: color_blue,
-                                                width: 2),
-                                            color: color_blue,
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Center(
-                                              child: Text(
-                                                "Recent Records",
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                    ),
-
-                                  ],
-                                )
-                              ],
-                            ),
-                          )),
-                      Flexible(
-                          flex: 4,
-                          child: Center(
-                            child: Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: FutureBuilder<
-                                  List<RecentRecords>>(
-                                future: Services.fetchRecordsCount(
-                                    "http://newapp.pkwallets.com/api/get_count_record"),
-                                builder: (context, snapshot) {
-                                  return snapshot
-                                      .connectionState ==
-                                      ConnectionState.done
-                                      ? snapshot.hasData
-                                      ? RecordsCount(snapshot,
-                                      gridClicked)
-                                      : ComComp.retryButton(
-                                      fetch)
-                                      : ComComp
-                                      .circularProgress();
-                                },
-                              ),
-                            ),
-                          )),
-                    ],
-                  ))
-            ],
-          ),
+          extendBody: true,
+          // appBar: ,
+          body: tabs[current_index],
           bottomNavigationBar: CurvedNavigationBar(
             height: 60.0,
+            backgroundColor: Color(0x00ffffff),
             items: <Widget>[
               Icon(
-                Icons.add,
+                AntIcons.homeFilled,
                 size: 30,
                 color: Colors.white,
               ),
-              Icon(Icons.list, size: 30, color: Colors.white),
-              Icon(Icons.compare_arrows, size: 30, color: Colors.white),
-              Icon(Icons.call_split, size: 30, color: Colors.white),
-              Icon(Icons.perm_identity, size: 30, color: Colors.white),
+              Icon(Icons.receipt_long, size: 30, color: Colors.white),
+              Icon(Icons.add, size: 30, color: Colors.white),
+              Icon(Icons.my_library_books_sharp, size: 30, color: Colors.white),
+              Icon(Icons.settings, size: 30, color: Colors.white),
             ],
             color: color_blue,
+            index: current_index,
             buttonBackgroundColor: color_blue,
-            backgroundColor: Color(0x00ffffff),
+            // backgroundColor: Color(0x00ffffff),
             animationCurve: Curves.easeInOut,
             animationDuration: Duration(milliseconds: 600),
             onTap: (index) {
-              // setState(() {
-              //   _page = index;
-              // });
+              setState(() {
+                current_index = index;
+              });
             },
-            // letIndexChange: (index) => true,
+            letIndexChange: (index) => true,
           ),
         )));
   }
@@ -461,7 +618,6 @@ gridClicked(BuildContext context, Category cellModel) async {
       // ]);
       SubCategoryListFiltered.add(subCategoryModel);
       DashBoard.subcatListFilter.add(subCategoryModel);
-
     }
   }
   String? nme = cellModel.name;
@@ -472,7 +628,9 @@ gridClicked(BuildContext context, Category cellModel) async {
 
   // _opensubCatgory(context,nme!,SubCategoryListFiltered);
 }
-Future<void> _opensubCatgory(BuildContext context,String heading, List<SubCategory> SubCategoryList) async {
+
+Future<void> _opensubCatgory(BuildContext context, String heading,
+    List<SubCategory> SubCategoryList) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -482,31 +640,32 @@ Future<void> _opensubCatgory(BuildContext context,String heading, List<SubCatego
         title: new Text(
           heading,
           style:
-          new TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              new TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
-        content: Wrap(
-          children:[ Container(
+        content: Wrap(children: [
+          Container(
             // Specify some width
             width: MediaQuery.of(context).size.width * .7,
             child: Center(
               child: Container(
-                child: SubCategoryList.length!=0?SubCategoryGrid(
-                    SubCategoryList, gridClicked):
-                Container(
-                  margin: const EdgeInsets.all(20.0),
-                  padding: const EdgeInsets.all(20.0),
-                  child: Center(
-                    child: Text(
-                      "No Record Found!",
-                      style:
-                      new TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
-                    ),
-                  ),
-                ),
+                child: SubCategoryList.length != 0
+                    ? SubCategoryGrid(SubCategoryList, gridClicked)
+                    : Container(
+                        margin: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(20.0),
+                        child: Center(
+                          child: Text(
+                            "No Record Found!",
+                            style: new TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blue),
+                          ),
+                        ),
+                      ),
               ),
             ),
-          ),]
-        ),
+          ),
+        ]),
         actions: <Widget>[
           new IconButton(
               splashColor: Colors.white,
@@ -609,7 +768,7 @@ class CategoryCell extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           "${cellModel.name}",
-                          style: TextStyle(color: Colors.blue,fontSize: 10),
+                          style: TextStyle(color: Colors.blue, fontSize: 10),
                         ),
                       ],
                     )),
@@ -682,8 +841,8 @@ class Services {
           _category_list.add(Category.fromJson(item));
         }
       }
-      DashBoard.subcatList=<SubCategory>[];
-      DashBoard.subcatListFilter=<SubCategory>[];
+      DashBoard.subcatList = <SubCategory>[];
+      DashBoard.subcatListFilter = <SubCategory>[];
       for (var item in convert.jsonDecode(response.body)['sub_category']) {
         {
           _subcategory_list.add(SubCategory.fromJson(item));

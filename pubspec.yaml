@@ -28,8 +28,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  simple_animations: ^1.3.3
+  simple_animations: ^4.0.1
   http: any
+  antdesign_icons:
   image_picker:
   shared_preferences:
   url_launcher: any
@@ -43,6 +44,8 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   fluttertoast: any
   auto_size_text: any
+#  validators: ^2.0.0+1
+  awesome_dialog: 2.1.2
 
 
 
@@ -111,3 +114,15 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: AquinoDemo
+      fonts:
+        - asset: assets/fonts/AquinoDemo.ttf
+
+    - family: Nisebuschgardens
+      fonts:
+        - asset: assets/fonts/Nisebuschgardens.ttf
+
+    - family: Nunito
+      fonts:
+        - asset: assets/fonts/NunitoBold.ttf

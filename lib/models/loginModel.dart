@@ -10,20 +10,20 @@ String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
     LoginModel({
-        required this.token,
+        // required this.token,
         required this.user,
     });
 
-    String token;
+    // String token;
     User user;
 
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        token: json["token"],
+        // token: json["token"],
         user: User.fromJson(json["user"]),
     );
 
     Map<String, dynamic> toJson() => {
-        "token": token,
+        // "token": token,
         "user": user.toJson(),
     };
 }
@@ -72,7 +72,7 @@ class User {
         updatedAt: DateTime.parse(json["updated_at"]),
         deletedAt: json["deleted_at"],
         wallet: json["wallet"],
-        roleType: json["role_type"],
+        roleType: "Shopkeeper"/*json["role_type"]*/,
     );
 
     Map<String, dynamic> toJson() => {
@@ -88,6 +88,6 @@ class User {
         "updated_at": updatedAt.toIso8601String(),
         "deleted_at": deletedAt,
         "wallet": wallet,
-        "role_type": roleType,
+        "role_type": "Shopkeeper"/*roleType*/,
     };
 }

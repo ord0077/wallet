@@ -145,7 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                     ),
 
-                                    onTap: () async {
+                                    onTap: () async
+                                    {
 
                                       if (emailController.text == "" || passwordController.text == ""){
                                         _showToast(context, 'One or more feild(s) are empty');
@@ -168,7 +169,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                           SharedPreferences userData = await SharedPreferences.getInstance();
                                           String userJSON = jsonEncode(loginModel);
-                                          userData.setString('token', loginModel.token.toString());
+                                          // userData.setString('token', loginModel.token.toString());
+                                          userData.setString('token', "");
 
                                           userData.setInt('user_id', loginModel.user.id);
                                           userData.setString('role_type', loginModel.user.roleType  );

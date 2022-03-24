@@ -1,5 +1,5 @@
 buildscript {
-    ext.kotlin_version = '1.4.32'
+    ext.kotlin_version = '1.6.10'
     repositories {
         google()
         jcenter()
@@ -10,7 +10,11 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile){
+        options.compilerArgs << "-Xlint:deprecation"
+    }
+}
 allprojects {
     repositories {
         google()
