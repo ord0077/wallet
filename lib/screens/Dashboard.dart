@@ -370,7 +370,90 @@ class _DashBoardState extends State<DashBoard> {
                                       ConnectionState.done
                                   ? snapshot.hasData
                                       ? RecordsCount(snapshot, gridClicked)
-                                      : ComComp.retryButton(fetch)
+                                      :
+                              Container(
+                                width: size.longestSide,
+                                child: Flexible(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Container(
+                                          width: size.width * .25,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "100",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontFamily: 'Montserrat Medium',
+                                                    color: Colors.blue,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 25),
+                                              ),
+                                              Text(
+                                                "Pending",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontFamily: 'Montserrat Medium',
+                                                    color: Colors.black,
+                                                    fontSize: 15),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          width: size.width * .3,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "120",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontFamily: 'Montserrat Medium',
+                                                    color: Colors.blue,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 25),
+                                              ),
+                                              Text(
+                                                "Accepted",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontFamily: 'Montserrat Medium',
+                                                    color: Colors.black,
+                                                    fontSize: 15),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          width: size.width * .25,
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "101",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontFamily: 'Montserrat Medium',
+                                                    color: Colors.blue,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 25),
+                                              ),
+                                              Text(
+                                                "Refund",
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontFamily: 'Montserrat Medium',
+                                                    color: Colors.black,
+                                                    fontSize: 15),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                              )
+                              /*ComComp.retryButton(fetch)*/
                                   : ComComp.circularProgress();
                             },
                           ),
@@ -427,92 +510,102 @@ class _DashBoardState extends State<DashBoard> {
                           MaterialStateColor.resolveWith((states) => Colors.blue),
                           columns: [
                             DataColumn(
-                                label: Text('Payment Date',
-                                    style: TextStyle(
-                                        color: Colors.white,
+                                label: Center(
+                                  child: Text('Payment Date',
+                                      style: TextStyle(
+                                          color: Colors.white,
 
-                                        fontWeight: FontWeight.bold))),
+                                          fontWeight: FontWeight.bold)),
+                                )),
                             DataColumn(
-                                label: Text('Payment Mode',
-                                    style: TextStyle(
+                                label: Center(
+                                  child: Text('Payment Mode',
+                                      style: TextStyle(
 
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold))),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                )),
                             DataColumn(
-                                label: Text('Previous Outstanding',
-                                    style: TextStyle(
+                                label: Center(
+                                  child: Text('Previous Outstanding',
+                                      style: TextStyle(
 
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold))),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                )),
                             DataColumn(
-                                label: Text('Paid Amount',
-                                    style: TextStyle(
+                                label: Center(
+                                  child: Text('Paid Amount',
+                                      style: TextStyle(
 
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold))),
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                )),
                             DataColumn(
-                                label: Text('Balance',
-                                    style: TextStyle(
+                                label: Center(
+                                  child: Text('Balance',
+                                      style: TextStyle(
 
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold)))
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold)),
+                                ))
                           ],
                           rows: [
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                             DataRow(cells: [
-                              DataCell(Text('29-12-2020')),
-                              DataCell(Text('BPM-OGJ')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('5.380')),
-                              DataCell(Text('0.000')),
+                              DataCell(Center(child: Text('29-12-2020'))),
+                              DataCell(Center(child: Text('BPM-OGJ'))),
+                              DataCell(Center(child: Text('5.380'))),
+                              DataCell(Center(child:Text('5.380'))),
+                              DataCell(Center(child:Text('0.000'))),
                             ]),
                           ],
                         )),
