@@ -40,7 +40,7 @@ class _DashBoardState extends State<DashBoard> {
         shrinkWrap: true,
         itemCount: snapshot.data!.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1.4,
+          childAspectRatio: 1,
           crossAxisCount: 3,
         ),
         itemBuilder: (BuildContext context, int index) {
@@ -827,7 +827,7 @@ class CategoryCell extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(5),
               child: Container(
-                width: size.width * 0.4,
+                width: size.width * 0.5,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -836,7 +836,7 @@ class CategoryCell extends StatelessWidget {
                   border: Border.all(color: color_blue, width: 2),
                 ),
                 child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 5.0),
                     child: Column(
                       children: [
                         ConstrainedBox(
@@ -855,9 +855,12 @@ class CategoryCell extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 2),
-                        Text(
-                          "${cellModel.name}",
-                          style: TextStyle(color: Colors.blue, fontSize: 10),
+                        Center(
+                          child: Text(
+                            "${cellModel.name}",
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(color: Colors.blue, fontSize: 10),
+                          ),
                         ),
                       ],
                     )),
