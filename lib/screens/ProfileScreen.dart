@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:antdesign_icons/antdesign_icons.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pk_wallets/screens/Dashboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,7 +52,53 @@ class ProfileScreen extends StatelessWidget {
                             color: Colors.white,
                           )),
                       IconButton(
-                          onPressed: () =>  showAlertDialog(context),
+                          onPressed: () =>  AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.WARNING,
+                            headerAnimationLoop: false,
+                            animType: AnimType.TOPSLIDE,
+                            showCloseIcon: true,
+                            closeIcon: const Icon(Icons.cancel_outlined),
+                            title: 'Logout',
+                            desc:
+                            'Are you sure you want to Logout?',
+                            btnCancelText: "No",
+                            btnOkText: "Yes",
+                            btnOkColor: Colors.green ,
+                            btnCancelColor: Colors.red ,
+                            btnCancelOnPress: () {
+
+
+                              // if(Platform.isAndroid){
+                              //   SystemNavigator.pop();
+                              // }else{
+                              //   Navigator.push(
+                              //       context, new MaterialPageRoute(builder: (context) => DashBoard()));
+                              // }
+                            },
+                            onDissmissCallback: (type) {
+                              debugPrint('Dialog Dissmiss from callback $type');
+                            },
+                            btnOkOnPress: () async {
+//              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+
+                              SharedPreferences prefs = await SharedPreferences.getInstance();
+                              await prefs.remove(userKey);
+                              await Future.delayed(Duration(seconds: 1));
+
+                              Navigator.of(context).pushAndRemoveUntil(
+                                // the new route
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) => LoginScreen(),
+                                  ),
+
+                                  // this function should return true when we're done removing routes
+                                  // but because we want to remove all other screens, we make it
+                                  // always return false
+                                      (Route<dynamic> route) => false
+                              );
+                            },
+                          ).show(),
                           icon: Icon(
                             AntIcons.logoutOutlined,
                             color: Colors.white,
@@ -274,6 +324,48 @@ class ProfileScreen extends StatelessWidget {
       onPressed: () { },
     );
 
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.WARNING,
+      headerAnimationLoop: false,
+      animType: AnimType.TOPSLIDE,
+      showCloseIcon: true,
+      closeIcon: const Icon(Icons.cancel_outlined),
+      title: 'Logout',
+      desc:
+      'Are you sure you want to Logout?',
+      btnCancelText: "No",
+      btnOkText: "Yes",
+
+      btnOkColor: Colors.green ,
+      btnCancelColor: Colors.red ,
+      btnCancelOnPress: () {
+        print("you choose no");
+        Navigator.of(context).pop(true);
+      },
+      onDissmissCallback: (type) {
+        debugPrint('Dialog Dissmiss from callback $type');
+      },
+      btnOkOnPress: () async {
+//              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.remove(userKey);
+        await Future.delayed(Duration(seconds: 1));
+
+        Navigator.of(context).pushAndRemoveUntil(
+          // the new route
+            MaterialPageRoute(
+              builder: (BuildContext context) => LoginScreen(),
+            ),
+
+            // this function should return true when we're done removing routes
+            // but because we want to remove all other screens, we make it
+            // always return false
+                (Route<dynamic> route) => false
+        );
+      },
+    ).show();
     // set up the AlertDialog
     AlertDialog alert= new AlertDialog(
       title: Text('Are you sure ?'),
