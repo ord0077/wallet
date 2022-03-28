@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../common/common.dart';
 import 'Dashboard.dart';
 import 'FormScreen.dart';
+import 'forms/FirstForm.dart';
 
 class SubCategoryScreen extends StatefulWidget {
   const SubCategoryScreen({Key? key}) : super(key: key);
@@ -55,7 +56,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
     prefs.setString('cat_name', nme == null ? "" : nme);
     await prefs.setString('sub_category', encodedData);
     Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => SubmitForm()));
+        .push(MaterialPageRoute(builder: (context) => FirstForm(nme == null ? "" : nme)));
 
     // _opensubCatgory(context,nme!,SubCategoryListFiltered);
   }

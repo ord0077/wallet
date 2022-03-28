@@ -64,7 +64,6 @@ class _SubmitFormState extends State<SubmitForm> {
 class TestForm extends StatefulWidget {
   String cat_name;
 
-
   TestForm(this.cat_name);
 
   @override
@@ -83,266 +82,300 @@ class _TestFormState extends State<TestForm> {
     final halfMediaWidth = MediaQuery.of(context).size.width / 2.0;
 
     return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          /*Container(
-            alignment: Alignment.topCenter,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  alignment: Alignment.topCenter,
-                  width: halfMediaWidth,
-                  child:TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Account No',
-                      contentPadding: EdgeInsets.all(15.0),
-                      border: InputBorder.none,
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                    ),
-                    obscureText:  false,
-                    // validator: validator,
-                    // onSaved: onSaved,
-                    keyboardType:TextInputType.number,
+        key: _formKey,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Bill No",
+                    style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
                   ),
-                  // MyTextFormField(
-                  //   hintText:
-                  //   validator: (String value) {
-                  //     if (value.isEmpty) {
-                  //       return 'Enter your account no';
-                  //     }
-                  //     return null;
-                  //   },
-                  //   onSaved: (value) {
-                  //     model.Account_no = value;
-                  //   },
-                  // ),
                 ),
-                Container(
-                  alignment: Alignment.topCenter,
-                  width: halfMediaWidth,
-                  child: TextFormField(
-                    decoration: InputDecoration(
+              ),
+              Material(
+                elevation: 10,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                child: TextFormField(
+                  decoration: InputDecoration(
                       hintText: 'Bill No',
                       contentPadding: EdgeInsets.all(15.0),
                       border: InputBorder.none,
-                      filled: true,
-                      fillColor: Colors.grey[200],
-                    ),
-                    obscureText:  false,
-                    // validator: validator,
-                    // onSaved: onSaved,
-                    keyboardType:TextInputType.number,
-                  ),
-                  // MyTextFormField(
-                  //   hintText: 'Bill No',
-                  //   validator: (String value) {
-                  //     if (value.isEmpty) {
-                  //       return 'Enter your bill no';
-                  //     }
-                  //     return null;
-                  //   },
-                  //   onSaved: (String value) {
-                  //     model.Bill_no = value;
-                  //   },
-                  // ),
-
-                )
-              ],
-            ),
-          ),*/
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Bill No',
-              contentPadding: EdgeInsets.all(15.0),
-              border: InputBorder.none,
-              filled: true,
-              fillColor: Colors.grey[200],
-            ),
-            obscureText:  false,
-            // validator: validator,
-            // onSaved: onSaved,
-            keyboardType:TextInputType.number,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Account No',
-              contentPadding: EdgeInsets.all(15.0),
-              border: InputBorder.none,
-              filled: true,
-              fillColor: Colors.grey[200],
-            ),
-            obscureText:  false,
-            // validator: validator,
-            // onSaved: onSaved,
-            keyboardType:TextInputType.number,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Email',
-              contentPadding: EdgeInsets.all(15.0),
-              border: InputBorder.none,
-              filled: true,
-              fillColor: Colors.grey[200],
-            ),
-            obscureText:  false,
-            // validator: validator,
-            // onSaved: onSaved,
-            keyboardType:TextInputType.emailAddress ,
-          ),
-          // MyTextFormField(
-          //   hintText: 'Email',
-          //   isEmail: true,
-          //   validator: (String value) {
-          //     if (!validator.isEmail(value)) {
-          //       return 'Please enter a valid email';
-          //     }
-          //     return null;
-          //   },
-          //   onSaved: (String value) {
-          //     model.email = value;
-          //   },
-          // ),
-        TextFormField(
-          decoration: InputDecoration(
-            hintText: 'Phone No',
-            contentPadding: EdgeInsets.all(15.0),
-            border: InputBorder.none,
-            filled: true,
-            fillColor: Colors.grey[200],
-          ),
-          obscureText:  false,
-          // validator: validator,
-          // onSaved: onSaved,
-          keyboardType:TextInputType.phone ,
-        ),
-          // MyTextFormField(
-          //   hintText: 'Phone No',
-          //   isPassword: false,
-          //   validator: (String value) {
-          //     if (value.length < 11 || value.length > 11) {
-          //       return 'Invalid Phone number';
-          //     }
-          //     _formKey.currentState?.save();
-          //     return null;
-          //   },
-          //   onSaved: (String value) {
-          //     model.Phone_no = value;
-          //   },
-          // ),
-          TextFormField(
-            decoration: InputDecoration(
-              hintText: 'Amount',
-              contentPadding: EdgeInsets.all(15.0),
-              border: InputBorder.none,
-              filled: true,
-              fillColor: Colors.grey[200],
-            ),
-            obscureText:  false,
-            // validator: validator,
-            // onSaved: onSaved,
-            keyboardType:TextInputType.number ,
-          ),
-          // MyTextFormField(
-          //   hintText: 'Amount',
-          //   isPassword: false,
-          //   validator: (String value) {
-          //     if (value.isEmpty) {
-          //       return 'Required field';
-          //     }
-          //     _formKey.currentState?.save();
-          //     return null;
-          //   },
-          //   onSaved: (String value) {
-          //     model.Amount = value;
-          //   },
-          // ),
-          RaisedButton(
-            color: Colors.blueAccent,
-            onPressed: () {
-              // if (_formKey.currentState!.validate()) {
-              //   _formKey.currentState!.save();
-              //
-              //   // Navigator.push(
-              //   //     context,
-              //   //     MaterialPageRoute(
-              //   //         builder: (context) => Result(model: this.model)));
-              // }
-              // AnimatedButton(
-              //   text: 'Succes Dialog',
-              //   color: Colors.green,
-              //
-              //   pressEvent: () {
-              //
-              //   },
-              // );
-              AwesomeDialog(
-                  context: context,
-                  animType: AnimType.LEFTSLIDE,
-                  headerAnimationLoop: false,
-                  dialogType: DialogType.SUCCES,
-                  // showCloseIcon: true,
-                  desc: 'Form submitted',
-                  btnOkOnPress: () {
-                    // Navigator.of(context).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DashBoard()));
-                  },
-                  btnOkIcon: Icons.check_circle,
-                  onDissmissCallback: (type) {
-                    debugPrint('Dialog Dissmiss from callback $type');
-                  })
-                ..show();
-            },
-            child: Text(
-              'Submit',
-              style: TextStyle(
-                color: Colors.white,
+                      hintStyle:
+                          TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
+                  obscureText: false,
+                  // validator: validator,
+                  // onSaved: onSaved,
+                  keyboardType: TextInputType.number,
+                ),
               ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Account No",
+                    style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                  ),
+                ),
+              ),
+              Material(
+                elevation: 10,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      hintText: 'Account No',
+                      contentPadding: EdgeInsets.all(15.0),
+                      border: InputBorder.none,
+                      hintStyle:
+                          TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
+                  obscureText: false,
+                  // validator: validator,
+                  // onSaved: onSaved,
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Email",
+                    style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                  ),
+                ),
+              ),
+
+              Material(
+                elevation: 10,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      hintText: 'Email',
+                      contentPadding: EdgeInsets.all(15.0),
+                      border: InputBorder.none,
+                      hintStyle:
+                          TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
+                  obscureText: false,
+                  // validator: validator,
+                  // onSaved: onSaved,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+              ),
+
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Phone No",
+                    style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                  ),
+                ),
+              ),
+              Material(
+                elevation: 10,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      hintText: 'Phone No',
+                      contentPadding: EdgeInsets.all(15.0),
+                      border: InputBorder.none,
+                      hintStyle:
+                          TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
+                  obscureText: false,
+                  // validator: validator,
+                  // onSaved: onSaved,
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Amount",
+                    style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                  ),
+                ),
+              ),
+              Material(
+                elevation: 10,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                child: TextFormField(
+
+                  decoration: InputDecoration(
+                      hintText: 'Amount',
+                      contentPadding: EdgeInsets.all(15.0),
+                      border: InputBorder.none,
+                      hintStyle:
+                          TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
+                  obscureText: false,
+                  // validator: validator,
+                  // onSaved: onSaved,
+                  keyboardType: TextInputType.number,
+                ),
+              ),
+
+              Container(
+                margin: EdgeInsets.all(15.0),
+                child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                  color:  Colors.blueAccent,
+                  onPressed: () {
+                    // if (_formKey.currentState!.validate()) {
+                    //   _formKey.currentState!.save();
+                    //
+                    //   // Navigator.push(
+                    //   //     context,
+                    //   //     MaterialPageRoute(
+                    //   //         builder: (context) => Result(model: this.model)));
+                    // }
+                    // AnimatedButton(
+                    //   text: 'Succes Dialog',
+                    //   color: Colors.green,
+                    //
+                    //   pressEvent: () {
+                    //
+                    //   },
+                    // );
+                    AwesomeDialog(
+                        context: context,
+                        animType: AnimType.LEFTSLIDE,
+                        headerAnimationLoop: false,
+                        dialogType: DialogType.SUCCES,
+                        // showCloseIcon: true,
+                        desc: 'Form submitted',
+                        btnOkOnPress: () {
+                          // Navigator.of(context).pop();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DashBoard()));
+                        },
+                        // btnOkIcon: Icons.check_circle,
+                        onDissmissCallback: (type) {
+                          debugPrint('Dialog Dissmiss from callback $type');
+                        })
+                      ..show();
+                  },
+                  child: Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class InputWidget extends StatelessWidget {
+  final double topRight;
+  final double bottomRight;
+  String hint;
+
+  InputWidget(this.hint, this.topRight, this.bottomRight);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(right: 40, bottom: 30),
+      child: Container(
+        width: MediaQuery.of(context).size.width - 40,
+        child: Material(
+          elevation: 10,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(bottomRight),
+                  topRight: Radius.circular(topRight))),
+          child: Padding(
+            padding: EdgeInsets.only(left: 40, right: 20, top: 10, bottom: 10),
+            child: TextField(
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: hint,
+                  hintStyle: TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
             ),
-          )
-        ],
+          ),
+        ),
       ),
     );
   }
 }
 
-/*class MyTextFormField extends StatelessWidget {
-  final String? hintText;
-  final Function? validator;
-  final Function? onSaved;
-  final bool isPassword;
-  final bool isEmail;
-
-  MyTextFormField({
-    this.hintText,
-    this.validator,
-    this.onSaved,
-    this.isPassword = false,
-    this.isEmail = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
+Widget roundedRectButton(
+    String title, List<Color> gradient, bool isEndIconVisible) {
+  return Builder(builder: (BuildContext mContext) {
     return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: TextFormField(
-        decoration: InputDecoration(
-          hintText: hintText,
-          contentPadding: EdgeInsets.all(15.0),
-          border: InputBorder.none,
-          filled: true,
-          fillColor: Colors.grey[200],
-        ),
-        obscureText: isPassword ? true : false,
-        // validator: validator,
-        // onSaved: onSaved,
-        keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
+      padding: EdgeInsets.only(bottom: 10),
+      child: Stack(
+        alignment: Alignment(1.0, 0.0),
+        children: <Widget>[
+          Container(
+            alignment: Alignment.center,
+            width: MediaQuery.of(mContext).size.width / 1.7,
+            decoration: ShapeDecoration(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0)),
+              gradient: LinearGradient(
+                  colors: gradient,
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight),
+            ),
+            child: Text(title,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500)),
+            padding: EdgeInsets.only(top: 16, bottom: 16),
+          ),
+          Visibility(
+            visible: isEndIconVisible,
+            child: Padding(
+                padding: EdgeInsets.only(right: 10),
+                child: ImageIcon(
+                  AssetImage("assets/ic_forward.png"),
+                  size: 30,
+                  color: Colors.white,
+                )),
+          ),
+        ],
       ),
     );
-  }
-}*/
+  });
+}
+
+const List<Color> signInGradients = [
+  Color(0xFF0EDED2),
+  Color(0xFF03A0FE),
+];
+
+const List<Color> signUpGradients = [
+  Color(0xFFFF9945),
+  Color(0xFFFc6076),
+];

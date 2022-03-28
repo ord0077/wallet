@@ -1,6 +1,10 @@
 import 'package:antdesign_icons/antdesign_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:pk_wallets/screens/Dashboard.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../consts.dart';
+import 'login_screen.dart';
 // import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -43,10 +47,16 @@ class ProfileScreen extends StatelessWidget {
                             AntIcons.arrowLeftOutlined,
                             color: Colors.white,
                           )),
-                      Icon(
-                        AntIcons.logoutOutlined,
-                        color: Colors.white,
-                      ),
+                      IconButton(
+                          onPressed: () =>  showAlertDialog(context),
+                          icon: Icon(
+                            AntIcons.logoutOutlined,
+                            color: Colors.white,
+                          )),
+                      // Icon(
+                      //   AntIcons.logoutOutlined,
+                      //   color: Colors.white,
+                      // ),
                     ],
                   ),
                   SizedBox(
@@ -253,6 +263,96 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
         )
+      ],
+    );
+  }
+  showAlertDialog(BuildContext context) {
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () { },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert= new AlertDialog(
+      title: Text('Are you sure ?'),
+      content: Text('You want to Logout ?'),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            print("you choose no");
+            Navigator.of(context).pop(false);
+          },
+          child: Text('No',style: TextStyle( fontSize: 17,color: Colors.red), ),
+        ),
+        FlatButton(
+          onPressed: () async {
+//              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.remove(userKey);
+            await Future.delayed(Duration(seconds: 1));
+
+            Navigator.of(context).pushAndRemoveUntil(
+              // the new route
+                MaterialPageRoute(
+                  builder: (BuildContext context) => LoginScreen(),
+                ),
+
+                // this function should return true when we're done removing routes
+                // but because we want to remove all other screens, we make it
+                // always return false
+                    (Route<dynamic> route) => false
+            );
+          },
+          child: Text('Yes', style: TextStyle( fontSize: 17,color:Colors.green)),
+        ),
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+  AlertDialog _exitApp(BuildContext context) {
+    return new AlertDialog(
+      title: Text('Are you sure ?'),
+      content: Text('You want to Logout ?'),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            print("you choose no");
+            Navigator.of(context).pop(false);
+          },
+          child: Text('No',style: TextStyle( fontSize: 17,color: Colors.red), ),
+        ),
+        FlatButton(
+          onPressed: () async {
+//              SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            await prefs.remove(userKey);
+            await Future.delayed(Duration(seconds: 1));
+
+            Navigator.of(context).pushAndRemoveUntil(
+              // the new route
+                MaterialPageRoute(
+                  builder: (BuildContext context) => LoginScreen(),
+                ),
+
+                // this function should return true when we're done removing routes
+                // but because we want to remove all other screens, we make it
+                // always return false
+                    (Route<dynamic> route) => false
+            );
+          },
+          child: Text('Yes', style: TextStyle( fontSize: 17,color:Colors.green)),
+        ),
       ],
     );
   }

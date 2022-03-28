@@ -503,7 +503,7 @@ class _DashBoardState extends State<DashBoard> {
                     child: FittedBox(
                         child:DataTable(
                           headingRowColor:
-                          MaterialStateColor.resolveWith((states) => Colors.blue),
+                          MaterialStateColor.resolveWith((states) => Colors.blueAccent),
                           columns: [
                             DataColumn(
                                 label: Center(
