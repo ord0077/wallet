@@ -35,7 +35,7 @@ class _DashBoardState extends State<DashBoard> {
   Padding CategoryGrid(
       AsyncSnapshot<List<Category>> snapshot, Function gridClicked) {
     return Padding(
-      padding: EdgeInsets.only(left: 15.0, right: 15.0),
+      padding: EdgeInsets.only(left: 10.0, right: 10.0,top: 10),
       child: GridView.builder(
         shrinkWrap: true,
         itemCount: snapshot.data!.length,
@@ -210,7 +210,7 @@ class _DashBoardState extends State<DashBoard> {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               margin: EdgeInsets.all(5),
-                              elevation: 5.0,
+                              elevation: 15.0,
                               child: Padding(
                                   padding: EdgeInsets.all(10),
                                   child: Center(
@@ -305,7 +305,7 @@ class _DashBoardState extends State<DashBoard> {
                         child: Center(
                           child: Container(
                             child: FutureBuilder<List<Category>>(
-                              future: Services.fetchHomeData(
+                              future: Services.fetchCategoryData(
                                   "http://newapp.pkwallets.com/api/get_all_category"),
                               builder: (context, snapshot) {
                                 return snapshot.connectionState ==
@@ -691,23 +691,23 @@ class _DashBoardState extends State<DashBoard> {
 gridClicked(BuildContext context, Category cellModel) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   final String? sub_categoryString = await prefs.getString('all_sub_category');
-  List<SubCategory> SubCategoryList = SubCategory.decode(sub_categoryString!);
+  // List<Children> SubCategoryList = Children.decode(sub_categoryString!);
   List<SubCategory> SubCategoryListFiltered = <SubCategory>[];
   String encodedData = "";
-  for (var i = 0; i < DashBoard.subcatList.length; i++) {
-    if (DashBoard.subcatList[i].cat_id == cellModel.id.toString()) {
-      SubCategory subCategoryModel = DashBoard.subcatList[i];
-      // encodedData += SubCategory.encode([
-      //   SubCategory(
-      //     cat_id: subCategoryModel.cat_id,
-      //     name: subCategoryModel.name,
-      //     mobile_icon: subCategoryModel.mobile_icon,
-      //     category_name: subCategoryModel.category_name,
-      //   )
-      // ]);
-      SubCategoryListFiltered.add(subCategoryModel);
-      DashBoard.subcatListFilter.add(subCategoryModel);
-    }
+  for (var i = 0; i < cellModel.children.length; i++) {
+    SubCategory subCategoryModel = cellModel.children[i];
+    // if (DashBoard.subcatList[i].parentId == cellModel.id.toString()) {
+    //   // encodedData += SubCategory.encode([
+    //   //   SubCategory(
+    //   //     cat_id: subCategoryModel.cat_id,
+    //   //     name: subCategoryModel.name,
+    //   //     mobile_icon: subCategoryModel.mobile_icon,
+    //   //     category_name: subCategoryModel.category_name,
+    //   //   )
+    //   // ]);
+    // }
+    SubCategoryListFiltered.add(subCategoryModel);
+    DashBoard.subcatListFilter.add(subCategoryModel);
   }
   String? nme = cellModel.name;
   prefs.setString('cat_name', nme == null ? "" : nme);
@@ -823,47 +823,59 @@ class CategoryCell extends StatelessWidget {
     return Wrap(
       children: [
         Center(
-          child: Container(
-            child: Padding(
-              padding: EdgeInsets.all(5),
-              child: Container(
-                width: size.width * 0.5,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12.0),
-                  ),
-                  border: Border.all(color: color_blue, width: 2),
-                ),
-                child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 5.0),
-                    child: Column(
-                      children: [
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                            minWidth: 20,
-                            minHeight: 30,
-                            maxWidth: 50,
-                            maxHeight: 80,
-                          ),
-                          child: Container(
-                            child: Image.asset(
-                              "assets/images/tpo.jpg",
-                              // fit:BoxFit.fitWidth,
-                              // height: 40,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 2),
-                        Center(
-                          child: Text(
-                            "${cellModel.name}",
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(color: Colors.blue, fontSize: 10),
-                          ),
+          child: Material(
+            child: Container(
+              child: Padding(
+                padding: EdgeInsets.all(5),
+                child: Material(
+                  child: Container(
+                    width: size.width * 0.5,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12.0),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.6),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: Offset(0, 3), // changes position of shadow
                         ),
                       ],
-                    )),
+                      border: Border.all(color: color_blue, width: 2),
+                    ),
+                    child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 5.0),
+                        child: Column(
+                          children: [
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                minWidth: 20,
+                                minHeight: 30,
+                                maxWidth: 50,
+                                maxHeight: 80,
+                              ),
+                              child: Container(
+                                child: Image.asset(
+                                  "assets/images/tpo.jpg",
+                                  // fit:BoxFit.fitWidth,
+                                  // height: 40,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Center(
+                              child: Text(
+                                "${cellModel.name}",
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(color: Colors.blue, fontSize: 10),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                ),
               ),
             ),
           ),
@@ -895,6 +907,14 @@ class SubCategoryCell extends StatelessWidget {
                   borderRadius: BorderRadius.all(
                     Radius.circular(12.0),
                   ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.6),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
                   border: Border.all(color: Colors.blue, width: 2),
                 ),
                 child: Padding(
@@ -923,27 +943,39 @@ class SubCategoryCell extends StatelessWidget {
 class Services {
   static Future<List<Category>> fetchHomeData(String Url) async {
     final response = await http.get(Uri.parse(Url));
-    SharedPreferences userData = await SharedPreferences.getInstance();
+
     if (response.statusCode == 200) {
       List<Category> _category_list = <Category>[];
-      List<SubCategory> _subcategory_list = <SubCategory>[];
-      String encodedData = "";
-      for (var item in convert.jsonDecode(response.body)['category']) {
+
+      for (var item in convert.jsonDecode(response.body)) {
+        {
+          _category_list.add(Category.fromJson(item));
+          // _category_list.add(Autogenerated.fromJson(item));
+          // _category_list.map((user) => ;
+        }
+      }
+      SharedPreferences userData = await SharedPreferences.getInstance();
+      await userData.setString('all_sub_category', "");
+      return _category_list;
+    } else {
+      // If that call was not successful, throw an error.
+      throw Exception('Failed to load post');
+    }
+  }
+  static Future<List<Category>> fetchCategoryData(String Url) async {
+    final response = await http.get(Uri.parse(Url));
+
+    if (response.statusCode == 200) {
+      List<Category> _category_list = <Category>[];
+
+      for (var item in convert.jsonDecode(response.body)) {
         {
           _category_list.add(Category.fromJson(item));
         }
       }
-      DashBoard.subcatList = <SubCategory>[];
-      DashBoard.subcatListFilter = <SubCategory>[];
-      for (var item in convert.jsonDecode(response.body)['sub_category']) {
-        {
-          _subcategory_list.add(SubCategory.fromJson(item));
-          DashBoard.subcatList.add(SubCategory.fromJson(item));
-          encodedData = SubCategory.encode([SubCategory.fromJson(item)]);
-        }
-      }
-
-      await userData.setString('all_sub_category', encodedData);
+      // _category_list.map((user) => Autogenerated.fromJson(convert.jsonDecode(response.body))).toList();
+      SharedPreferences userData = await SharedPreferences.getInstance();
+      // await userData.setString('all_sub_category', Category.encodedData);
       return _category_list;
     } else {
       // If that call was not successful, throw an error.

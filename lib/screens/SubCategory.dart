@@ -36,9 +36,13 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
         shrinkWrap: true,
         itemCount: snapshot.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1.5,
-          crossAxisCount: 2,
+          childAspectRatio: 1,
+          crossAxisCount: 3,
         ),
+        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //   childAspectRatio: 1.5,
+        //   crossAxisCount: 2,
+        // ),
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: SubCategoryCell(snapshot[index]),
