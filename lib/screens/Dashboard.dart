@@ -35,7 +35,7 @@ class _DashBoardState extends State<DashBoard> {
   Padding CategoryGrid(
       AsyncSnapshot<List<Category>> snapshot, Function gridClicked) {
     return Padding(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0,top: 10),
+      padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10),
       child: GridView.builder(
         shrinkWrap: true,
         itemCount: snapshot.data!.length,
@@ -83,86 +83,85 @@ class _DashBoardState extends State<DashBoard> {
             refundStr = refund;
           }
           return Container(
-            width: size.longestSide,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: size.width * .25,
-                  child: Column(
-                    children: [
-                      Text(
-                        pendingStr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Medium',
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ),
-                      Text(
-                        "Pending",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Medium',
-                            color: Colors.black,
-                            fontSize: 15),
-                      ),
-                    ],
+              width: size.longestSide,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: size.width * .25,
+                    child: Column(
+                      children: [
+                        Text(
+                          pendingStr,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Medium',
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25),
+                        ),
+                        Text(
+                          "Pending",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Medium',
+                              color: Colors.black,
+                              fontSize: 15),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  width: size.width * .3,
-                  child: Column(
-                    children: [
-                      Text(
-                        acceptStr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Medium',
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ),
-                      Text(
-                        "Accepted",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Medium',
-                            color: Colors.black,
-                            fontSize: 15),
-                      ),
-                    ],
+                  Container(
+                    width: size.width * .3,
+                    child: Column(
+                      children: [
+                        Text(
+                          acceptStr,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Medium',
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25),
+                        ),
+                        Text(
+                          "Accepted",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Medium',
+                              color: Colors.black,
+                              fontSize: 15),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  width: size.width * .25,
-                  child: Column(
-                    children: [
-                      Text(
-                        refundStr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Medium',
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25),
-                      ),
-                      Text(
-                        "Refund",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Montserrat Medium',
-                            color: Colors.black,
-                            fontSize: 15),
-                      ),
-                    ],
+                  Container(
+                    width: size.width * .25,
+                    child: Column(
+                      children: [
+                        Text(
+                          refundStr,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Medium',
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25),
+                        ),
+                        Text(
+                          "Refund",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: 'Montserrat Medium',
+                              color: Colors.black,
+                              fontSize: 15),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )
-          );
+                ],
+              ));
         },
       ),
     );
@@ -226,32 +225,72 @@ class _DashBoardState extends State<DashBoard> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
+                                              const SizedBox(
+                                                height: 15,
+                                                width: 1,
+                                              ),
                                               Expanded(
-                                                child: const AutoSizeText(
-                                                  "BALANCE",
-                                                  // textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                      fontFamily:
-                                                          'Montserrat Medium',
-                                                      color: Colors.black,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 20),
-                                                ),
+                                                child:
+                                                  Column(
+                                                    children: [
+                                                      const AutoSizeText(
+                                                        "Current Balance",
+                                                        // textAlign: TextAlign.left,
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                            'Montserrat Medium',
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                            FontWeight.normal,
+                                                            fontSize: 15),
+                                                      ),
+                                                      AutoSizeText(
+                                                          "SR " + walletAmount,
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                            'Montserrat Medium',
+                                                            color: Colors.black,
+                                                            fontWeight:
+                                                            FontWeight.bold,
+                                                            fontSize: 30,
+                                                          ),
+                                                          minFontSize: 10),
+                                                    ],
+                                                  )
                                               ),
 
                                               // const SizedBox(height: 50,),
+                                              // Expanded(
+                                              //   child:
+                                              // ),
+                                              const SizedBox(
+                                                height: 8,
+                                                width: 1,
+                                              ),
                                               Expanded(
-                                                child: AutoSizeText(
-                                                    "SR " + walletAmount,
-                                                    style: TextStyle(
-                                                      fontFamily:
-                                                          'Montserrat Medium',
-                                                      color: color_blue,
-                                                      fontSize: 25,
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                    // Note: Styles for TextSpans must be explicitly defined.
+                                                    // Child text spans will inherit styles from parent
+                                                    style: const TextStyle(
+                                                      fontSize: 20.0,
+                                                      color: Colors.black,
                                                     ),
-                                                    minFontSize: 10),
-                                              )
+                                                    children: <TextSpan>[
+                                                      TextSpan(text: 'Welcome '),
+                                                      TextSpan(
+                                                          text: userName,
+                                                          style:
+                                                              const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontFamily:
+                                                                'Montserrat Medium',
+                                                          )),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -261,36 +300,56 @@ class _DashBoardState extends State<DashBoard> {
                                         Expanded(
                                           child: Column(
                                             children: [
-                                              new AutoSizeText(
-                                                userName,
-                                                style: TextStyle(
-                                                    color: Colors.black87,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                                minFontSize: 20,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-//                       textAlign: TextAlign.right,
-                                              ),
                                               const SizedBox(
-                                                height: 20,
+                                                height: 50,
                                                 width: 1,
                                               ),
-                                              ConstrainedBox(
-                                                constraints: BoxConstraints(
-                                                  minWidth: 20,
-                                                  minHeight: 30,
-                                                  maxWidth: 50,
-                                                  maxHeight: 80,
-                                                ),
+                                              Center(
+
                                                 child: Container(
-                                                  child: Image.asset(
-                                                    "assets/images/tpo.jpg",
-                                                    // fit:BoxFit.fitWidth,
-                                                    // height: 40,
+                                                  width: 120,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                      Radius.circular(5.0),
+                                                    ),
+                                                    border: Border.all(
+                                                        color: color_blue,
+                                                        width: 2),
+                                                    color: color_blue,
+                                                  ),
+                                                  child: Row(
+                                                    children: [
+                                                      Container(
+                                                        child: Image.asset(
+                                                          "assets/images/toopup.png",
+                                                          // fit:BoxFit.fitWidth,
+                                                          // height: 40,
+                                                        ),
+                                                      ),
+                                                      AutoSizeText(
+                                                          "Top Up",
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                            'Montserrat Medium',
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                            FontWeight.bold,
+                                                            fontSize: 20,
+                                                          ),
+                                                          minFontSize: 10),
+                                                    ],
                                                   ),
                                                 ),
                                               )
+                                              // ConstrainedBox(
+                                              //     constraints: BoxConstraints(
+                                              //       minWidth: 20,
+                                              //       minHeight: 30,
+                                              //       maxWidth: 50,
+                                              //       maxHeight: 80,
+                                              //     ),
+                                              //     child: )
                                             ],
                                           ),
                                         ),
@@ -334,8 +393,8 @@ class _DashBoardState extends State<DashBoard> {
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(5.0),
                                     ),
-                                    border: Border.all(
-                                        color: color_blue, width: 2),
+                                    border:
+                                        Border.all(color: color_blue, width: 2),
                                     color: color_blue,
                                   ),
                                   child: Padding(
@@ -343,8 +402,7 @@ class _DashBoardState extends State<DashBoard> {
                                     child: Center(
                                       child: Text(
                                         "Recent Records",
-                                        style:
-                                        TextStyle(color: Colors.white),
+                                        style: TextStyle(color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -367,89 +425,103 @@ class _DashBoardState extends State<DashBoard> {
                                       ConnectionState.done
                                   ? snapshot.hasData
                                       ? RecordsCount(snapshot, gridClicked)
-                                      :
-                              Container(
-                                width: size.longestSide,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Container(
-                                      width: size.width * .25,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "100",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat Medium',
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 25),
-                                          ),
-                                          Text(
-                                            "Pending",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat Medium',
-                                                color: Colors.black,
-                                                fontSize: 15),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: size.width * .3,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "120",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat Medium',
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 25),
-                                          ),
-                                          Text(
-                                            "Accepted",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat Medium',
-                                                color: Colors.black,
-                                                fontSize: 15),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: size.width * .25,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "101",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat Medium',
-                                                color: Colors.blue,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 25),
-                                          ),
-                                          Text(
-                                            "Refund",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontFamily: 'Montserrat Medium',
-                                                color: Colors.black,
-                                                fontSize: 15),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              )
-                              /*ComComp.retryButton(fetch)*/
+                                      : Container(
+                                          width: size.longestSide,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Container(
+                                                width: size.width * .25,
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      "100",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat Medium',
+                                                          color: Colors.blue,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 25),
+                                                    ),
+                                                    Text(
+                                                      "Pending",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat Medium',
+                                                          color: Colors.black,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                width: size.width * .3,
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      "120",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat Medium',
+                                                          color: Colors.blue,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 25),
+                                                    ),
+                                                    Text(
+                                                      "Accepted",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat Medium',
+                                                          color: Colors.black,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Container(
+                                                width: size.width * .25,
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                      "101",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat Medium',
+                                                          color: Colors.blue,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 25),
+                                                    ),
+                                                    Text(
+                                                      "Refund",
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              'Montserrat Medium',
+                                                          color: Colors.black,
+                                                          fontSize: 15),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ))
+                                  /*ComComp.retryButton(fetch)*/
                                   : ComComp.circularProgress();
                             },
                           ),
@@ -480,18 +552,16 @@ class _DashBoardState extends State<DashBoard> {
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 24,
-                          fontWeight: FontWeight.bold
-                      ),
+                          fontWeight: FontWeight.bold),
                     ),
                     Icon(Icons.receipt_long, size: 30, color: Colors.black),
                     Text(
                       'Payment History',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24,
-                          fontWeight: FontWeight.bold
-                      ),
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -501,114 +571,108 @@ class _DashBoardState extends State<DashBoard> {
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: FittedBox(
-                        child:DataTable(
-                          headingRowColor:
-                          MaterialStateColor.resolveWith((states) => Colors.blueAccent),
-                          columns: [
-                            DataColumn(
-                                label: Center(
-                                  child: Text('Payment Date',
-                                      style: TextStyle(
-                                          color: Colors.white,
-
-                                          fontWeight: FontWeight.bold)),
-                                )),
-                            DataColumn(
-                                label: Center(
-                                  child: Text('Payment Mode',
-                                      style: TextStyle(
-
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                )),
-                            DataColumn(
-                                label: Center(
-                                  child: Text('Previous Outstanding',
-                                      style: TextStyle(
-
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                )),
-                            DataColumn(
-                                label: Center(
-                                  child: Text('Paid Amount',
-                                      style: TextStyle(
-
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                )),
-                            DataColumn(
-                                label: Center(
-                                  child: Text('Balance',
-                                      style: TextStyle(
-
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold)),
-                                ))
-                          ],
-                          rows: [
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Center(child: Text('29-12-2020'))),
-                              DataCell(Center(child: Text('BPM-OGJ'))),
-                              DataCell(Center(child: Text('5.380'))),
-                              DataCell(Center(child:Text('5.380'))),
-                              DataCell(Center(child:Text('0.000'))),
-                            ]),
-                          ],
+                        child: DataTable(
+                      headingRowColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.blueAccent),
+                      columns: [
+                        DataColumn(
+                            label: Center(
+                          child: Text('Payment Date',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
                         )),
+                        DataColumn(
+                            label: Center(
+                          child: Text('Payment Mode',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        )),
+                        DataColumn(
+                            label: Center(
+                          child: Text('Previous Outstanding',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        )),
+                        DataColumn(
+                            label: Center(
+                          child: Text('Paid Amount',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        )),
+                        DataColumn(
+                            label: Center(
+                          child: Text('Balance',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold)),
+                        ))
+                      ],
+                      rows: [
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Center(child: Text('29-12-2020'))),
+                          DataCell(Center(child: Text('BPM-OGJ'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('5.380'))),
+                          DataCell(Center(child: Text('0.000'))),
+                        ]),
+                      ],
+                    )),
                   ))
             ],
           )
-
         ],
       ),
       Center(
@@ -846,32 +910,34 @@ class CategoryCell extends StatelessWidget {
                       border: Border.all(color: color_blue, width: 2),
                     ),
                     child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.0,horizontal: 5.0),
+                        padding: EdgeInsets.all(10),
                         child: Column(
                           children: [
-                            ConstrainedBox(
-                              constraints: BoxConstraints(
-                                minWidth: 20,
-                                minHeight: 30,
-                                maxWidth: 50,
-                                maxHeight: 80,
-                              ),
-                              child: Container(
-                                child: Image.asset(
-                                  "assets/images/tpo.jpg",
-                                  // fit:BoxFit.fitWidth,
-                                  // height: 40,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 2),
+                            // ConstrainedBox(
+                            //   constraints: BoxConstraints(
+                            //     minWidth: 20,
+                            //     minHeight: 30,
+                            //     maxWidth: 50,
+                            //     maxHeight: 80,
+                            //   ),
+                            //   child: Container(
+                            //     child: Image.asset(
+                            //       "assets/images/tpo.jpg",
+                            //       // fit:BoxFit.fitWidth,
+                            //       // height: 40,
+                            //     ),
+                            //   ),
+                            // ),
+                            const SizedBox(height: 20),
                             Center(
                               child: Text(
                                 "${cellModel.name}",
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(color: Colors.blue, fontSize: 10),
+                                style:
+                                    TextStyle(color: Colors.blue, fontSize: 15),
                               ),
                             ),
+                            const SizedBox(height: 20),
                           ],
                         )),
                   ),
@@ -962,6 +1028,7 @@ class Services {
       throw Exception('Failed to load post');
     }
   }
+
   static Future<List<Category>> fetchCategoryData(String Url) async {
     final response = await http.get(Uri.parse(Url));
 
