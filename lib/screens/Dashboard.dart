@@ -981,20 +981,38 @@ class SubCategoryCell extends StatelessWidget {
                       offset: Offset(0, 3), // changes position of shadow
                     ),
                   ],
-                  border: Border.all(color: Colors.blue, width: 2),
+                  border: Border.all(color: HexColor.fromHex('#3183b5'), width: 2),
                 ),
                 child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 5.0),
                     child: Column(
                       children: [
-                        Image.asset(
-                          "assets/images/tpo.jpg",
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          "${cellModel.name}",
-                          style: TextStyle(color: Colors.blue),
-                        ),
+
+                          // ConstrainedBox(
+                          //   constraints: BoxConstraints(
+                          //     minWidth: 20,
+                          //     minHeight: 30,
+                          //     maxWidth: 50,
+                          //     maxHeight: 80,
+                          //   ),
+                          //   child: Container(
+                          //     child: Image.asset(
+                          //       "assets/images/tpo.jpg",
+                          //       // fit:BoxFit.fitWidth,
+                          //       // height: 40,
+                          //     ),
+                          //   ),
+                          // ),
+                          const SizedBox(height: 20),
+                          Center(
+                            child: Text(
+                              "${cellModel.name}",
+                              overflow: TextOverflow.ellipsis,
+                              style:
+                              TextStyle(color: HexColor.fromHex('#3183b5'), fontSize: 15),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
                       ],
                     )),
               ),

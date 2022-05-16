@@ -32,7 +32,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           Flexible(
             child: Image.asset(
-              "assets/images/pkwallets-light.png",
+              "assets/images/pkwallets_light.png",
             ),
             flex: 2,
           ),

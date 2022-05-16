@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pk_wallets/screens/forms/SecondForm.dart';
 
+import '../../consts.dart';
+import '../Dashboard.dart';
+
 class FirstForm extends StatelessWidget {
   String cat_name;
 
@@ -25,101 +28,120 @@ class FirstForm extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: color_blue,
           title: Center(child: Text(cat_name)),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => {
+              Navigator.of(context).pop()},
+          ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Form(
-              key: _formKey,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 4.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Email",
-                          style:
+        backgroundColor: color_back,
+        body: Column(
+          children: [
+
+            Center(
+              child: Image.asset(
+                "assets/images/header.jpeg",
+                // fit:BoxFit.fitWidth,
+                // height: 40,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Form(
+                  key: _formKey,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 4.0),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Email",
+                              style:
                               TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
-                        ),
-                      ),
-                    ),
-                    Material(
-                      elevation: 10,
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            hintText: 'Email',
-                            contentPadding: EdgeInsets.all(15.0),
-                            border: InputBorder.none,
-                            hintStyle: TextStyle(
-                                color: Color(0xFFE1E1E1), fontSize: 14)),
-                        obscureText: false,
-                        // validator: validator,
-                        // onSaved: onSaved,
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 4.0),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Phone No",
-                          style:
-                              TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
-                        ),
-                      ),
-                    ),
-                    Material(
-                      elevation: 10,
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                            hintText: 'Phone No',
-                            contentPadding: EdgeInsets.all(15.0),
-                            border: InputBorder.none,
-                            hintStyle: TextStyle(
-                                color: Color(0xFFE1E1E1), fontSize: 14)),
-                        obscureText: false,
-                        // validator: validator,
-                        // onSaved: onSaved,
-                        keyboardType: TextInputType.number,
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(15.0),
-                      child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.0))),
-                        color: Colors.blueAccent,
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SecondForm(cat_name)));
-                        },
-                        child: Text(
-                          'Proceed',
-                          style: TextStyle(
-                            color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
+                        Material(
+                          elevation: 10,
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                hintText: 'Email',
+                                contentPadding: EdgeInsets.all(15.0),
+                                border: InputBorder.none,
+                                hintStyle: TextStyle(
+                                    color: Color(0xFFE1E1E1), fontSize: 14)),
+                            obscureText: false,
+                            // validator: validator,
+                            // onSaved: onSaved,
+                            keyboardType: TextInputType.emailAddress,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 4.0),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Phone No",
+                              style:
+                              TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                            ),
+                          ),
+                        ),
+                        Material(
+                          elevation: 10,
+                          color: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                                hintText: 'Phone No',
+                                contentPadding: EdgeInsets.all(15.0),
+                                border: InputBorder.none,
+                                hintStyle: TextStyle(
+                                    color: Color(0xFFE1E1E1), fontSize: 14)),
+                            obscureText: false,
+                            // validator: validator,
+                            // onSaved: onSaved,
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.all(15.0),
+                          child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(5.0))),
+                            color: HexColor.fromHex('#3183b5'),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SecondForm(cat_name)));
+                            },
+                            child: Text(
+                              'Proceed',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-          ),
+                  )
+              ),
+            )
+          ],
         ),
       ),
     );

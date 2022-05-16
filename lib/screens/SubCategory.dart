@@ -6,6 +6,7 @@ import 'package:pk_wallets/widgets/appbarWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/common.dart';
+import '../consts.dart';
 import 'Dashboard.dart';
 import 'FormScreen.dart';
 import 'forms/FirstForm.dart';
@@ -31,24 +32,38 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
   Padding SubCategoryGrid(
       List<SubCategory> snapshot, Function gridClicked) {
     return Padding(
-      padding: EdgeInsets.only(left: 5.0, right: 5.0),
-      child: GridView.builder(
-        shrinkWrap: true,
-        itemCount: snapshot.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1,
-          crossAxisCount: 3,
-        ),
-        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //   childAspectRatio: 1.5,
-        //   crossAxisCount: 2,
-        // ),
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            child: SubCategoryCell(snapshot[index]),
-            onTap: () =>   gridClicked(context, snapshot[index]),
-          );
-        },
+      padding:EdgeInsets.only(left: 4.0, right: 4.0),
+      child: Column(
+        children: [
+          Center(
+            child: Image.asset(
+              "assets/images/header.jpeg",
+              // fit:BoxFit.fitWidth,
+              // height: 40,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 1.0, right: 1.0),
+            child: GridView.builder(
+              shrinkWrap: true,
+              itemCount: snapshot.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1,
+                crossAxisCount: 3,
+              ),
+              // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              //   childAspectRatio: 1.5,
+              //   crossAxisCount: 2,
+              // ),
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  child: SubCategoryCell(snapshot[index]),
+                  onTap: () =>   gridClicked(context, snapshot[index]),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -90,7 +105,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             child: Scaffold(
 
           appBar: AppBar(
-            backgroundColor: HexColor.fromHex('#3183b5'),
+            backgroundColor: color_blue,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: Colors.white),
               onPressed: () => {

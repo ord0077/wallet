@@ -9,6 +9,7 @@ const Color DarkBlue = Color.fromRGBO(49,131,182,1);
 const Color Orange = Color.fromRGBO(241, 136, 18, 1);
 const Color AppBlue = Color.fromRGBO(45, 87, 163, 1);
 Color color_blue = HexColor.fromHex('#3183b5');
+Color color_back = HexColor.fromHex('#F7F7F7');
 
 // Shared Pref key
 const String userKey = "userData";
