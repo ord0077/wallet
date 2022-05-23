@@ -28,6 +28,8 @@ class SecondForm extends StatelessWidget {
         ),
       ),
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        backgroundColor: color_back,
         appBar: AppBar(
           backgroundColor: color_blue,
           title: Center(child: Text(cat_name)),
@@ -55,97 +57,130 @@ class SecondForm extends StatelessWidget {
                     scrollDirection: Axis.vertical,
                     child: Column(
                       children: <Widget>[
-                        Padding(
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Bill No",
-                              style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                        // Padding(
+                        //   padding:
+                        //   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                        //   child: Align(
+                        //     alignment: Alignment.centerLeft,
+                        //     child: Text(
+                        //       "Bill No",
+                        //       style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                        //     ),
+                        //   ),
+                        // ),
+                        Material(
+                          color: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
+                          child: Container(
+                            margin: EdgeInsets.only(right: 20,left: 20,top: 5),
+                            decoration: BoxDecoration(
+                                color:Colors.transparent ,
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: color_blue,
+                                        width: 2.0
+                                    )
+                                )
+                            ),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  hintText: 'Enter Bill No',
+                                  contentPadding: EdgeInsets.all(15.0),
+                                  border: InputBorder.none,
+                                  hintStyle:
+                                  TextStyle(color: Colors.grey/*Color(0xF7F7F7)*/, fontSize: 14)),
+                              obscureText: false,
+                              // validator: validator,
+                              // onSaved: onSaved,
+                              keyboardType: TextInputType.number,
                             ),
                           ),
                         ),
+                        // Padding(
+                        //   padding:
+                        //   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                        //   child: Align(
+                        //     alignment: Alignment.centerLeft,
+                        //     child: Text(
+                        //       "Account No",
+                        //       style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                        //     ),
+                        //   ),
+                        // ),
                         Material(
-                          elevation: 10,
-                          color: Colors.white,
+                          color: Colors.transparent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                hintText: 'Bill No',
-                                contentPadding: EdgeInsets.all(15.0),
-                                border: InputBorder.none,
-                                hintStyle:
-                                TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
-                            obscureText: false,
-                            // validator: validator,
-                            // onSaved: onSaved,
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Account No",
-                              style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                          child: Container(
+                            margin: EdgeInsets.only(right: 20,left: 20,top: 5),
+                            decoration: BoxDecoration(
+                                color:Colors.transparent ,
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: color_blue,
+                                        width: 2.0
+                                    )
+                                )
+                            ),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  hintText: 'Enter Account No',
+                                  contentPadding: EdgeInsets.all(15.0),
+                                  border: InputBorder.none,
+                                  hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 14)),
+                              obscureText: false,
+                              // validator: validator,
+                              // onSaved: onSaved,
+                              keyboardType: TextInputType.number,
                             ),
                           ),
                         ),
+                        // Padding(
+                        //   padding:
+                        //   const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                        //   child: Align(
+                        //     alignment: Alignment.centerLeft,
+                        //     child: Text(
+                        //       "Amount",
+                        //       style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                        //     ),
+                        //   ),
+                        // ),
                         Material(
-                          elevation: 10,
-                          color: Colors.white,
+                          color: Colors.transparent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                hintText: 'Account No',
-                                contentPadding: EdgeInsets.all(15.0),
-                                border: InputBorder.none,
-                                hintStyle:
-                                TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
-                            obscureText: false,
-                            // validator: validator,
-                            // onSaved: onSaved,
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                          const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Amount",
-                              style: TextStyle(fontSize: 16, color: Color(0xFF999A9A)),
+                          child: Container(
+                            margin: EdgeInsets.only(right: 20,left: 20,top: 5),
+                            decoration: BoxDecoration(
+                                color:Colors.transparent ,
+                                border: Border(
+                                    bottom: BorderSide(
+                                        color: color_blue,
+                                        width: 2.0
+                                    )
+                                )
                             ),
-                          ),
-                        ),
-                        Material(
-                          elevation: 10,
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                          child: TextFormField(
+                            child: TextFormField(
 
-                            decoration: InputDecoration(
-                                hintText: 'Amount',
-                                contentPadding: EdgeInsets.all(15.0),
-                                border: InputBorder.none,
-                                hintStyle:
-                                TextStyle(color: Color(0xFFE1E1E1), fontSize: 14)),
-                            obscureText: false,
-                            // validator: validator,
-                            // onSaved: onSaved,
-                            keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                  hintText: 'Enter Amount',
+                                  contentPadding: EdgeInsets.all(15.0),
+                                  border: InputBorder.none,
+                                  hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 14)),
+                              obscureText: false,
+                              // validator: validator,
+                              // onSaved: onSaved,
+                              keyboardType: TextInputType.number,
+                            ),
                           ),
                         ),
 
                         Container(
-                          margin: EdgeInsets.all(15.0),
+                          margin: EdgeInsets.only(top:150.0,right:15.0,left: 15.0),
                           child: RaisedButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(5.0))),
@@ -180,10 +215,12 @@ class SecondForm extends StatelessWidget {
                                   })
                                 ..show();
                             },
-                            child: Text(
-                              'Submit',
-                              style: TextStyle(
-                                color: Colors.white,
+                            child: Center(
+                              child: Text(
+                                'Submit',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),

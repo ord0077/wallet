@@ -40,9 +40,15 @@ class _DashBoardState extends State<DashBoard> {
         shrinkWrap: true,
         itemCount: snapshot.data!.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1,
+          childAspectRatio: 3 / 2,
           crossAxisCount: 3,
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 5.0,
         ),
+        // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //   childAspectRatio: 1,
+        //   crossAxisCount: 3,
+        // ),
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             child: CategoryCell(snapshot.data![index]),
@@ -182,7 +188,7 @@ class _DashBoardState extends State<DashBoard> {
     double height = MediaQuery.of(context).size.height;
     int _page = 0;
     GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-    final tabs = [
+    var tabs = [
       Stack(
         children: [
           Container(
@@ -226,14 +232,14 @@ class _DashBoardState extends State<DashBoard> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               const SizedBox(
-                                                height: 15,
+                                                height: 10,
                                                 width: 1,
                                               ),
                                               Expanded(
                                                 child:
                                                   Column(
                                                     children: [
-                                                      const AutoSizeText(
+                                                      AutoSizeText(
                                                         "Current Balance",
                                                         // textAlign: TextAlign.left,
                                                         style: TextStyle(
@@ -242,7 +248,7 @@ class _DashBoardState extends State<DashBoard> {
                                                             color: Colors.black,
                                                             fontWeight:
                                                             FontWeight.normal,
-                                                            fontSize: 15),
+                                                            fontSize: width * 0.035 ),
                                                       ),
                                                       AutoSizeText(
                                                           "SR " + walletAmount,
@@ -252,7 +258,7 @@ class _DashBoardState extends State<DashBoard> {
                                                             color: Colors.black,
                                                             fontWeight:
                                                             FontWeight.bold,
-                                                            fontSize: 30,
+                                                            fontSize:  width * 0.08,
                                                           ),
                                                           minFontSize: 10),
                                                     ],
@@ -264,7 +270,7 @@ class _DashBoardState extends State<DashBoard> {
                                               //   child:
                                               // ),
                                               const SizedBox(
-                                                height: 8,
+                                                height: 4,
                                                 width: 1,
                                               ),
                                               Expanded(
@@ -272,8 +278,8 @@ class _DashBoardState extends State<DashBoard> {
                                                   text: TextSpan(
                                                     // Note: Styles for TextSpans must be explicitly defined.
                                                     // Child text spans will inherit styles from parent
-                                                    style: const TextStyle(
-                                                      fontSize: 20.0,
+                                                    style: TextStyle(
+                                                      fontSize: width * 0.053,
                                                       color: Colors.black,
                                                     ),
                                                     children: <TextSpan>[
@@ -394,15 +400,16 @@ class _DashBoardState extends State<DashBoard> {
                                       Radius.circular(5.0),
                                     ),
                                     border:
-                                        Border.all(color: color_blue, width: 2),
-                                    color: color_blue,
+                                        Border.all(color: color_blue.withOpacity(0.6), width: 2),
+                                    color: color_blue.withOpacity(0.6),
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
                                       child: Text(
                                         "Recent Records",
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(color: color_blue, fontWeight:
+                                        FontWeight.bold, ),
                                       ),
                                     ),
                                   ),
@@ -414,118 +421,221 @@ class _DashBoardState extends State<DashBoard> {
                       )),
                   Flexible(
                       flex: 4,
-                      child: Center(
-                        child: Container(
-                          margin: EdgeInsets.only(top: 10),
-                          child: FutureBuilder<List<RecentRecords>>(
-                            future: Services.fetchRecordsCount(
-                                "http://newapp.pkwallets.com/api/get_count_record"),
-                            builder: (context, snapshot) {
-                              return snapshot.connectionState ==
-                                      ConnectionState.done
-                                  ? snapshot.hasData
-                                      ? RecordsCount(snapshot, gridClicked)
-                                      : Container(
-                                          width: size.longestSide,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Container(
-                                                width: size.width * .25,
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      "100",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: Colors.blue,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 25),
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.only(top: 10),
+                              child: FutureBuilder<List<RecentRecords>>(
+                                future: Services.fetchRecordsCount(
+                                    "http://newapp.pkwallets.com/api/get_count_record"),
+                                builder: (context, snapshot) {
+                                  return snapshot.connectionState ==
+                                          ConnectionState.done
+                                      ? snapshot.hasData
+                                          ? RecordsCount(snapshot, gridClicked)
+                                          : Container(
+                                              width: size.longestSide,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Container(
+                                                    width: size.width * .25,
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          "100",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Montserrat Medium',
+                                                              color: Colors.blue,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              fontSize: size.width*.08),
+                                                        ),
+                                                        Text(
+                                                          "Pending",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Montserrat Medium',
+                                                              color: Colors.black,
+                                                              fontSize: 15),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      "Pending",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: Colors.black,
-                                                          fontSize: 15),
+                                                  ),
+                                                  Container(
+                                                    width: size.width * .3,
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          "120",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Montserrat Medium',
+                                                              color: Colors.blue,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              fontSize: size.width*.08),
+                                                        ),
+                                                        Text(
+                                                          "Accepted",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Montserrat Medium',
+                                                              color: Colors.black,
+                                                              fontSize: 15),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                width: size.width * .3,
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      "120",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: Colors.blue,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 25),
+                                                  ),
+                                                  Container(
+                                                    width: size.width * .25,
+                                                    child: Column(
+                                                      children: [
+                                                        Text(
+                                                          "101",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Montserrat Medium',
+                                                              color: Colors.blue,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              fontSize: size.width*.08),
+                                                        ),
+                                                        Text(
+                                                          "Refund",
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: TextStyle(
+                                                              fontFamily:
+                                                                  'Montserrat Medium',
+                                                              color: Colors.black,
+                                                              fontSize: 15),
+                                                        ),
+                                                      ],
                                                     ),
-                                                    Text(
-                                                      "Accepted",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: Colors.black,
-                                                          fontSize: 15),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              Container(
-                                                width: size.width * .25,
-                                                child: Column(
-                                                  children: [
-                                                    Text(
-                                                      "101",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: Colors.blue,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 25),
-                                                    ),
-                                                    Text(
-                                                      "Refund",
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              'Montserrat Medium',
-                                                          color: Colors.black,
-                                                          fontSize: 15),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ))
-                                  /*ComComp.retryButton(fetch)*/
-                                  : ComComp.circularProgress();
-                            },
+                                                  ),
+                                                ],
+                                              ))
+                                      /*ComComp.retryButton(fetch)*/
+                                      : ComComp.circularProgress();
+                                },
+                              ),
+                            ),
                           ),
-                        ),
+                          Container(
+                            margin: EdgeInsets.only(
+                                left: 17, right: 17, bottom: 1,top: 20),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: <Widget>[
+                                  Flexible(child: Container(
+                                    height:  height * 0.06,
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(5.0))),
+                                      color: HexColor.fromHex('#3183b5'),
+                                      onPressed: () {
+                                      },
+                                      child: Center(
+                                        child: Text(
+                                          'View Transactions',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ), flex: 1,),
+                                  Flexible(child: Container(
+                                    height:  height * 0.06,
+                                    margin: EdgeInsets.only(left: 10),
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                          BorderRadius.all(Radius.circular(5.0))),
+                                      color: HexColor.fromHex('#3183b5'),
+                                      onPressed: () {
+                                      },
+                                      child: Center(
+                                        child: Text(
+                                          'View Logs',
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ), flex: 1,)
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Container(
+                          //     width: size.longestSide,
+                          //     margin: EdgeInsets.only(top: 35),
+                          //     child: Row(
+                          //       mainAxisAlignment:
+                          //       MainAxisAlignment.center,
+                          //       mainAxisSize: MainAxisSize.max,
+                          //       children: [
+                          //         Container(
+                          //           height: height * 0.06,
+                          //           child:RaisedButton(
+                          //             shape: RoundedRectangleBorder(
+                          //                 borderRadius:
+                          //                 BorderRadius.all(Radius.circular(5.0))),
+                          //             color: HexColor.fromHex('#3183b5'),
+                          //             onPressed: () {
+                          //             },
+                          //             child: Center(
+                          //               child: Text(
+                          //                 'View Transactions',
+                          //                 style: TextStyle(
+                          //                   color: Colors.white,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ),
+                          //         Container(
+                          //           height: height * 0.06,
+                          //           margin: EdgeInsets.only(left: 10),
+                          //           child:RaisedButton(
+                          //             shape: RoundedRectangleBorder(
+                          //                 borderRadius:
+                          //                 BorderRadius.all(Radius.circular(5.0))),
+                          //             color: HexColor.fromHex('#3183b5'),
+                          //             onPressed: () {
+                          //             },
+                          //             child: Center(
+                          //               child: Text(
+                          //                 'View Logs',
+                          //                 style: TextStyle(
+                          //                   color: Colors.white,
+                          //                 ),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         )
+                          //       ],
+                          //     ))
+                        ],
                       )),
                 ],
               ))
@@ -884,69 +994,63 @@ class CategoryCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Wrap(
-      children: [
-        Center(
-          child: Material(
-            child: Container(
-              child: Padding(
-                padding: EdgeInsets.all(5),
-                child: Material(
-                  child: Container(
-                    width: size.width * 0.5,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12.0),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.6),
-                          spreadRadius: 5,
-                          blurRadius: 7,
-                          offset: Offset(0, 3), // changes position of shadow
-                        ),
-                      ],
-                      border: Border.all(color: color_blue, width: 2),
-                    ),
-                    child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          children: [
-                            // ConstrainedBox(
-                            //   constraints: BoxConstraints(
-                            //     minWidth: 20,
-                            //     minHeight: 30,
-                            //     maxWidth: 50,
-                            //     maxHeight: 80,
-                            //   ),
-                            //   child: Container(
-                            //     child: Image.asset(
-                            //       "assets/images/tpo.jpg",
-                            //       // fit:BoxFit.fitWidth,
-                            //       // height: 40,
-                            //     ),
-                            //   ),
-                            // ),
-                            const SizedBox(height: 20),
-                            Center(
-                              child: Text(
-                                "${cellModel.name}",
-                                overflow: TextOverflow.ellipsis,
-                                style:
-                                    TextStyle(color: Colors.blue, fontSize: 15),
-                              ),
-                            ),
-                            const SizedBox(height: 20),
-                          ],
-                        )),
-                  ),
-                ),
+    return SizedBox(
+      width: size.width * 0.5,
+      height: size.height * 0.1,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 5),
+        child: Material(
+          child: Container(
+
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(12.0),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.6),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+              border: Border.all(color: color_blue, width: 2),
             ),
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // ConstrainedBox(
+                    //   constraints: BoxConstraints(
+                    //     minWidth: 20,
+                    //     minHeight: 30,
+                    //     maxWidth: 50,
+                    //     maxHeight: 80,
+                    //   ),
+                    //   child: Container(
+                    //     child: Image.asset(
+                    //       "assets/images/tpo.jpg",
+                    //       // fit:BoxFit.fitWidth,
+                    //       // height: 40,
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 20),
+                    Text(
+                      "${cellModel.name}",
+                      // overflow: TextOverflow.ellipsis,
+                      style:
+                          TextStyle(color: color_blue, fontSize: size.width*.035),
+                    ),
+                    // const SizedBox(height: 20),
+                  ],
+                )),
           ),
-        )
-      ],
+        ),
+      ),
     );
   }
 }
@@ -960,66 +1064,62 @@ class SubCategoryCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Wrap(
-      children: [
-        Center(
+    return SizedBox(
+      width: size.width * 0.5,
+      height: size.height * 0.1,
+      child: Container(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5),
           child: Container(
-            child: Padding(
-              padding: EdgeInsets.all(5),
-              child: Container(
-                width: size.width * 0.4,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.6),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                  border: Border.all(color: HexColor.fromHex('#3183b5'), width: 2),
-                ),
-                child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0),
-                    child: Column(
-                      children: [
-
-                          // ConstrainedBox(
-                          //   constraints: BoxConstraints(
-                          //     minWidth: 20,
-                          //     minHeight: 30,
-                          //     maxWidth: 50,
-                          //     maxHeight: 80,
-                          //   ),
-                          //   child: Container(
-                          //     child: Image.asset(
-                          //       "assets/images/tpo.jpg",
-                          //       // fit:BoxFit.fitWidth,
-                          //       // height: 40,
-                          //     ),
-                          //   ),
-                          // ),
-                          const SizedBox(height: 20),
-                          Center(
-                            child: Text(
-                              "${cellModel.name}",
-                              overflow: TextOverflow.ellipsis,
-                              style:
-                              TextStyle(color: HexColor.fromHex('#3183b5'), fontSize: 15),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                      ],
-                    )),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(
+                Radius.circular(12.0),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.6),
+                  spreadRadius: 2,
+                  blurRadius: 2,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+              border: Border.all(color: HexColor.fromHex('#3183b5'), width: 2),
             ),
+            child: Padding(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // ConstrainedBox(
+                    //   constraints: BoxConstraints(
+                    //     minWidth: 20,
+                    //     minHeight: 30,
+                    //     maxWidth: 50,
+                    //     maxHeight: 80,
+                    //   ),
+                    //   child: Container(
+                    //     child: Image.asset(
+                    //       "assets/images/tpo.jpg",
+                    //       // fit:BoxFit.fitWidth,
+                    //       // height: 40,
+                    //     ),
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 20),
+                    Text(
+                      "${cellModel.name}",
+                      // overflow: TextOverflow.ellipsis,
+                      style:
+                      TextStyle(color: Colors.blue, fontSize: 15),
+                    ),
+                    // const SizedBox(height: 20),
+                  ],
+                )),
           ),
-        )
-      ],
+        ),
+      ),
     );
   }
 }

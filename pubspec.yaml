@@ -42,6 +42,8 @@ dependencies:
   #  flutter_statusbarcolor: any
   connectivity: any
   curved_navigation_bar: ^1.0.3
+  flutter_screenutil: ^5.5.3+2
+  responsive_flutter: ^0.0.4
   fluttertoast: any
   auto_size_text: any
 #  validators: ^2.0.0+1

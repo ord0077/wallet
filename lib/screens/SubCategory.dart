@@ -48,8 +48,10 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
               shrinkWrap: true,
               itemCount: snapshot.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1,
+                childAspectRatio: 3 / 2,
                 crossAxisCount: 3,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 5.0,
               ),
               // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               //   childAspectRatio: 1.5,
