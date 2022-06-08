@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pk_wallets/consts.dart';
 
@@ -12,35 +13,36 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       padding: EdgeInsets.only(top: 5,bottom: 5),
       color: color_blue,
       child:Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(width: 1),
           Flexible(
             child: RawMaterialButton(
               onPressed: () {},
-              elevation: 2.0,
-              padding: EdgeInsets.all(5),
               fillColor: const Color(0xFFF5F6F9),
               child: Icon(
                 Icons.person,
                 color: color_blue,
-                size: 50,
+                size: 35,
               ),
               shape: const CircleBorder(),
             ),
             flex: 1,
           ),
           Flexible(
-            child: Image.asset(
-              "assets/images/pkwallets_light.png",
-            ),
+            child: Container(
+              alignment: Alignment.center,
+    child: Image.asset(
+      "assets/images/pkwallets_light.png",
+    ),
+    ),
             flex: 2,
           ),
+          const SizedBox(width: 20),
           const Flexible(
             child: Icon(
-              Icons.settings,
+              Icons.notifications_none,
               color: Colors.white,
-              size: 35,
+              size: 30,
             ),
             flex: 1,
           ),

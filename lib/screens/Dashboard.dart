@@ -192,7 +192,7 @@ class _DashBoardState extends State<DashBoard> {
       Stack(
         children: [
           Container(
-            height: height * 0.15,
+            height: height * 0.25,
             color: color_blue,
           ),
           Container(
@@ -206,18 +206,18 @@ class _DashBoardState extends State<DashBoard> {
                       child: Container(
                         margin: EdgeInsets.only(top: 10),
                         height: height,
-                        width: width / 1.2,
+                        width: width / 1.06,
                         child: Center(
                           child: Card(
                               shape: RoundedRectangleBorder(
                                 side:
                                     BorderSide(color: Colors.white70, width: 1),
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(13),
                               ),
                               margin: EdgeInsets.all(5),
                               elevation: 15.0,
                               child: Padding(
-                                  padding: EdgeInsets.all(10),
+                                  padding: EdgeInsets.only(top: 15,right: 10,left: 10),
                                   child: Center(
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -232,7 +232,7 @@ class _DashBoardState extends State<DashBoard> {
                                                 CrossAxisAlignment.center,
                                             children: [
                                               const SizedBox(
-                                                height: 10,
+                                                height: 5,
                                                 width: 1,
                                               ),
                                               Expanded(
@@ -248,7 +248,10 @@ class _DashBoardState extends State<DashBoard> {
                                                             color: Colors.black,
                                                             fontWeight:
                                                             FontWeight.normal,
-                                                            fontSize: width * 0.035 ),
+                                                            fontSize: width * 0.046,),
+                                                      ),
+                                                      const SizedBox(
+                                                        height: 2,
                                                       ),
                                                       AutoSizeText(
                                                           "SR " + walletAmount,
@@ -256,9 +259,8 @@ class _DashBoardState extends State<DashBoard> {
                                                             fontFamily:
                                                             'Montserrat Medium',
                                                             color: Colors.black,
-                                                            fontWeight:
-                                                            FontWeight.bold,
-                                                            fontSize:  width * 0.08,
+                                                            fontWeight: FontWeight.w900,
+                                                            fontSize:  width * 0.09,
                                                           ),
                                                           minFontSize: 10),
                                                     ],
@@ -270,7 +272,7 @@ class _DashBoardState extends State<DashBoard> {
                                               //   child:
                                               // ),
                                               const SizedBox(
-                                                height: 4,
+                                                height: 10,
                                                 width: 1,
                                               ),
                                               Expanded(
@@ -279,11 +281,15 @@ class _DashBoardState extends State<DashBoard> {
                                                     // Note: Styles for TextSpans must be explicitly defined.
                                                     // Child text spans will inherit styles from parent
                                                     style: TextStyle(
-                                                      fontSize: width * 0.053,
+                                                      fontSize: width * 0.045,
                                                       color: Colors.black,
                                                     ),
                                                     children: <TextSpan>[
-                                                      TextSpan(text: 'Welcome '),
+                                                      TextSpan(text: 'Welcome ',style:
+                                                      const TextStyle(
+                                                        fontFamily:
+                                                        'Montserrat Medium',
+                                                      )),
                                                       TextSpan(
                                                           text: userName,
                                                           style:
@@ -313,11 +319,12 @@ class _DashBoardState extends State<DashBoard> {
                                               Center(
 
                                                 child: Container(
-                                                  width: 120,
+                                                  alignment: Alignment.center,
+                                                  width: 130,
                                                   decoration: BoxDecoration(
                                                     borderRadius:
                                                     BorderRadius.all(
-                                                      Radius.circular(5.0),
+                                                      Radius.circular(7.0),
                                                     ),
                                                     border: Border.all(
                                                         color: color_blue,
@@ -326,11 +333,12 @@ class _DashBoardState extends State<DashBoard> {
                                                   ),
                                                   child: Row(
                                                     children: [
+                                                      SizedBox(width: 8.0,),
                                                       Container(
                                                         child: Image.asset(
                                                           "assets/images/toopup.png",
-                                                          // fit:BoxFit.fitWidth,
-                                                          // height: 40,
+                                                          // fit:BoxFit.scaleDown,
+                                                          height: 27,
                                                         ),
                                                       ),
                                                       AutoSizeText(
@@ -342,8 +350,9 @@ class _DashBoardState extends State<DashBoard> {
                                                             fontWeight:
                                                             FontWeight.bold,
                                                             fontSize: 20,
+                                                            letterSpacing: 1,
                                                           ),
-                                                          minFontSize: 10),
+                                                          minFontSize: 10,),
                                                     ],
                                                   ),
                                                 ),
@@ -364,6 +373,22 @@ class _DashBoardState extends State<DashBoard> {
                                   ))),
                         ),
                       )),
+                  Container(
+                    margin: EdgeInsets.only(left: 20.0,top: 20.0),
+                    alignment: Alignment.topLeft,
+                    child: AutoSizeText(
+                      "Add New Transaction",
+                      style: TextStyle(
+                        fontFamily:
+                        'Montserrat Medium',
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15,
+                        letterSpacing: 1,
+                      ),
+                      minFontSize: 10,
+                    ),
+                  ),
                   Flexible(
                       flex: 4,
                       child: Container(
@@ -408,7 +433,7 @@ class _DashBoardState extends State<DashBoard> {
                                     child: Center(
                                       child: Text(
                                         "Recent Records",
-                                        style: TextStyle(color: color_blue, fontWeight:
+                                        style: TextStyle(color: Colors.black87, fontWeight:
                                         FontWeight.bold, ),
                                       ),
                                     ),
@@ -1041,9 +1066,10 @@ class CategoryCell extends StatelessWidget {
                     // const SizedBox(height: 20),
                     Text(
                       "${cellModel.name}",
+                      textAlign: TextAlign.center,
                       // overflow: TextOverflow.ellipsis,
                       style:
-                          TextStyle(color: color_blue, fontSize: size.width*.035),
+                          TextStyle(color: color_blue, fontSize: size.width*.04,fontWeight: FontWeight.w500),
                     ),
                     // const SizedBox(height: 20),
                   ],

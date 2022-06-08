@@ -36,12 +36,12 @@ class CustomScreenUtil {
     _instance!.uiHeightPx = height;
     _instance!.allowFontScaling = allowFontScaling;
 
-    _pixelRatio = WidgetsBinding.instance.window.devicePixelRatio;
-    _screenWidth = WidgetsBinding.instance.window.physicalSize.width;
-    _screenHeight = WidgetsBinding.instance.window.physicalSize.height;
-    _statusBarHeight = WidgetsBinding.instance.window.padding.top;
-    _bottomBarHeight = WidgetsBinding.instance.window.padding.bottom;
-    _textScaleFactor = WidgetsBinding.instance.window.textScaleFactor;
+    _pixelRatio = WidgetsBinding.instance!.window.devicePixelRatio;
+    _screenWidth = WidgetsBinding.instance!.window.physicalSize.width;
+    _screenHeight = WidgetsBinding.instance!.window.physicalSize.height;
+    _statusBarHeight = WidgetsBinding.instance!.window.padding.top;
+    _bottomBarHeight = WidgetsBinding.instance!.window.padding.bottom;
+    _textScaleFactor = WidgetsBinding.instance!.window.textScaleFactor;
   }
 
   /// The number of font pixels for each logical pixel.
